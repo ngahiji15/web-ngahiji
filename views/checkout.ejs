@@ -96,6 +96,7 @@
         var newphone = normalisasiNomorHP(phonenumber);
           var product_id = ('<%= new_product_id %>');
         var product_name = '<%= new_product_name %>';
+        var amount = '<%= new_product_price %>';
         console.log(name);
 
         let words = "dilla";
@@ -112,7 +113,7 @@
         console.log('======== log testing ========');
       
         var body = JSON.stringify({
-            "amount": 56000,
+            "amount": amount,
             "name": name,
             "email": email,
             "phone": newphone,

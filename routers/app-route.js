@@ -164,7 +164,8 @@ router.post('/create-transaction', function (req, res) {
             let urlcallbackprod = 'https://318c-2001-448a-304e-3c57-e492-e276-501d-c2e4.ngrok-free.app';
             let urlcallbackstaging = 'http://localhost:3000'
             let urlcallbackaws = process.env.PROD_URL;
-            let callback_url = urlcallbackaws+'/result/';
+            let urlcallbackhosting = 'https://ngahiji.xyz';
+            let callback_url = urlcallbackhosting+'/result/';
             let requestTarget = '/checkout/v1/payment'
             let url = 'https://api-sandbox.doku.com'+ requestTarget;
             const body = JSON.stringify({
@@ -376,7 +377,8 @@ router.post('/create-transaction', function (req, res) {
                             let urlcallbackprod = 'https://318c-2001-448a-304e-3c57-e492-e276-501d-c2e4.ngrok-free.app';
                             let urlcallbackstaging = 'http://localhost:3000'
                             let urlcallbackaws = process.env.PROD_URL;
-                            let callback_url = urlcallbackaws+'/result/';
+                            let urlcallbackhosting = 'https://ngahiji.xyz';
+                            let callback_url = urlcallbackhosting+'/result/';
                             let requestTarget = '/checkout/v1/payment'
                             let url = 'https://api-sandbox.doku.com'+ requestTarget;
                             const body = JSON.stringify({
@@ -921,7 +923,8 @@ router.post('/create-transaction', function (req, res) {
                             let newtimeStamp = timeStamp();
                             let product_name_checkout = product_name;
                             let urlcallbackaws = process.env.PROD_URL;
-                            let callback_url = urlcallbackaws+'/result/';
+                            let urlcallbackhosting = 'https://ngahiji.xyz';
+                            let callback_url = urlcallbackhosting+'/result/';
                             let requestTarget = '/checkout/v1/payment'
                             let url = 'https://api-sandbox.doku.com'+ requestTarget;
                             const body = JSON.stringify({
