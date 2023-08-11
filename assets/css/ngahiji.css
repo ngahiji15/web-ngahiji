@@ -1,0 +1,152 @@
+.animated {
+    position: relative;
+  }
+  
+  .animated-info {
+    display: inline-block;
+    vertical-align: top;
+    min-width: 260px;
+    position: relative;
+  }
+  
+  .animated-item {
+    color: currentColor;
+  }
+  
+  .animated-item {
+    font-size: 38px;
+    line-height: inherit;
+    display: block;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    animation: BottomTotop 6s linear infinite 0s;
+  }
+  .animated-item:nth-child(2n+2) {
+    animation-delay: 2s;
+  }
+  .animated-item:nth-child(3n+3) {
+    animation-delay: 4s;
+  }
+
+  @keyframes BottomTotop {
+    0% {
+      opacity: 0;
+    }
+    5% {
+      opacity: 0;
+      transform: translateY(5px);
+    }
+    10% {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+    25% {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+    30% {
+      opacity: 0;
+      transform: translateY(5px);
+    }
+    80% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .widget {
+    position: relative;
+    max-width: 650px;
+    width: 95%;
+    margin: 0 auto;
+    border-radius: 50px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    border: 1px solid #dee2e6;
+    padding: 20px 0;
+    margin-top: -50px;
+    z-index: 999;
+    background: currentColor;
+    /* box-shadow: 0 0 30px rgba(173, 181, 189, 0.4); */
+  }
+  
+  .widget .widget-item {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+    -webkit-flex-basis: 0;
+        -ms-flex-preferred-size: 0;
+            flex-basis: 0;
+    text-align: center;
+    border-right: 1px solid currentColor;
+  }
+  
+  .widget .widget-item:last-child {
+    border-right: 0;
+  }
+  
+  .widget .widget-item h2, .header .widget .widget-item p {
+    margin: 0;
+    color: currentColor;
+  }
+  
+  .widget .widget-item p {
+    opacity: .7;
+    font-size: 14px;
+    color: azure;
+  }
+
+  .journey {
+    background-color: #353A46;
+    padding-bottom: 2em;
+  }
+
+  .journey h2 {
+    color: azure;
+  }
+
+  .journey  {
+    background-color: #353A46;
+    padding-bottom: 2em;
+  }
+
+  .cara-pesan {
+    background-color: #353A46;
+    padding-bottom: 2em;
+  }
+
+  .step-payment {
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 22px;
+    }
+
+    .step-payment h6, p {
+        padding-left: 0;
+        padding-right: 0;
+        font-size: 22px;
+        color: azure;
+    }
+
+    .step-payment h1 {
+        padding-left: 0;
+        padding-right: 0;
+        font-size: 40px;
+        color: azure;
+    }
+
+    .step-payment h2 {
+        padding-left: 0;
+        padding-right: 0;
+        font-size: 30px;
+        color: azure;
+    }

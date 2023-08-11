@@ -1,0 +1,57 @@
+</main>
+
+<div class="container">
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <div class="col-md-4 d-flex align-items-center">
+      <span class="mb-3 mb-md-0 text-body-secondary">&copy; 2023 Ngahji 1.0.0</span>
+    </div>
+
+    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+      <!-- <li class="ms-3"><a class="text-body-secondary" href="https://github.com/ashddq/" target="_blank"><svg class="bi" width="24" height="24"><use xlink:href="#wa"/></svg></a></li> -->
+      <li class="ms-3"><a class="text-body-secondary" href="https://www.instagram.com/ngahiji/" target="_blank"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
+      <!-- <li class="ms-3"><a class="text-body-secondary" href="https://www.linkedin.com/in/ashddq/" target="_blank"><svg class="bi" width="24" height="24"><use xlink:href="#linkedin"/></svg></a></li> -->
+    </ul>
+  </footer>
+</div>
+
+
+  <script src="/assets/js/bootstrap.bundle.min.js"></script>
+
+  <script type="text/javascript">
+    window.onload = function() { jam(); }
+   
+    function jam() {
+     var e = document.getElementById('jam'),
+     d = new Date(), Hari, Tanggal, Bulan, Tahun, Jam, Menit, Detik;
+     Hari = d.getDay();
+     Tanggal = d.getDate();
+     Bulan = d.getMonth();
+     Tahun = d.getFullYear();
+     Jam = d.getHours();
+     Menit = set(d.getMinutes());
+     Detik = set(d.getSeconds());
+     
+     arrbulan = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+     arrHari = ["Minggu","Senin","Selasa","Rabu","Kamis","Jum'at","Sabtu"];
+   
+     e.innerHTML = arrHari[Hari] + ', ' + Tanggal + ' ' + arrbulan[Bulan] + ' ' + Tahun + ' ' + Jam +'.'+ Menit +'.'+ Detik;
+   
+     setTimeout('jam()', 1000);
+    }
+   
+    function set(e) {
+     e = e < 10 ? '0'+ e : e;
+     return e;
+    }
+   </script>
+
+<script src="/assets/js/jquery-3.3.1.min.js"></script>
+<script src="/assets/js/popper.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/Headroom.js"></script>
+<script src="/assets/js/jQuery.headroom.js"></script>
+<script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/smoothscroll.js"></script>
+<script src="/assets/js/custom.js"></script>
+</body>
+</html>

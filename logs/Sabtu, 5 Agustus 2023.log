@@ -1,0 +1,54 @@
+2023-08-05T01:29:08.522Z info: Server listening at http://localhost:3000
+2023-08-05T01:31:45.055Z info: Server listening at http://localhost:3000
+2023-08-05T01:32:04.507Z info: Server listening at http://localhost:3000
+2023-08-05T01:32:12.220Z info: Server listening at http://localhost:3000
+2023-08-05T01:33:17.885Z info: Server listening at http://localhost:3000
+2023-08-05T01:38:11.118Z info: Server listening at http://localhost:3000
+2023-08-05T01:38:22.741Z info: Server listening at http://localhost:3000
+2023-08-05T01:38:50.476Z info: Server listening at http://localhost:3000
+2023-08-05T01:39:15.889Z info: Server listening at http://localhost:3000
+2023-08-05T01:59:34.210Z info: Server listening at http://localhost:3000
+2023-08-05T02:02:54.415Z info: Server listening at http://localhost:3000
+2023-08-05T02:29:16.273Z info: Server listening at http://localhost:3000
+2023-08-05T02:29:19.147Z info: Server listening at http://localhost:3000
+2023-08-05T02:29:22.858Z info: Server listening at http://localhost:3000
+2023-08-05T02:33:41.091Z info: Server listening at http://localhost:3000
+2023-08-05T02:35:31.297Z info: Server listening at http://localhost:3000
+2023-08-05T02:38:14.418Z info: Server listening at http://localhost:3000
+2023-08-05T02:39:42.597Z info: Server listening at http://localhost:3000
+2023-08-05T02:40:12.041Z info: Server listening at http://localhost:3000
+2023-08-05T02:40:31.793Z info: Server listening at http://localhost:3000
+2023-08-05T02:40:33.472Z info: Server listening at http://localhost:3000
+2023-08-05T02:41:04.878Z info: Server listening at http://localhost:3000
+2023-08-05T02:41:30.231Z info: Server listening at http://localhost:3000
+2023-08-05T02:41:37.779Z info: Server listening at http://localhost:3000
+2023-08-05T02:44:16.215Z info: Server listening at http://localhost:3000
+2023-08-05T03:17:52.657Z info: Server listening at http://localhost:3000
+2023-08-05T03:33:29.330Z info: Server listening at http://localhost:3000
+2023-08-05T03:34:59.355Z info: Server listening at http://localhost:3000
+2023-08-05T03:35:31.347Z info: Server listening at http://localhost:3000
+2023-08-05T03:36:31.583Z info: Server listening at http://localhost:3000
+2023-08-05T03:37:25.485Z info: Server listening at http://localhost:3000
+2023-08-05T03:38:31.486Z info: Server listening at http://localhost:3000
+2023-08-05T03:38:50.289Z info: Server listening at http://localhost:3000
+2023-08-05T03:55:54.013Z info: Server listening at http://localhost:3000
+2023-08-05T03:57:26.748Z info: Server listening at http://localhost:3000
+2023-08-05T03:58:00.017Z error: /check-id/payment - ::1 - Exception, Invalid Signature
+2023-08-05T03:58:00.021Z error: /create-transaction - ::1 - Exception, Please Check Your Code!
+2023-08-05T03:59:22.359Z info: Server listening at http://localhost:3000
+2023-08-05T03:59:44.537Z error: /check-id/payment - ::1 - last id from transaction adalah 9 
+2023-08-05T03:59:44.901Z info: /create-transaction - ::1 - [object Object]
+2023-08-05T03:59:44.901Z info: /create-transaction - ::1 - ============== Inisiasi Data =============
+2023-08-05T03:59:44.901Z info: /create-transaction - ::1 - {"name":"Alif","email":"m.alif@doku.com","phone":"6282223631214","invoice":"INV-NGAHIJI-CHGAFAICJF","amount":56000,"transaction_date":"Sabtu, 5 Agustus 2023 10:59:44","transaction_update":"Sabtu, 5 Agustus 2023 10:59:44","payment_method":"DOKU CHECKOUT","status":"PENDING","product_id":"1","product_name":"Netflix","url_checkout":"https://sandbox.doku.com/checkout/link/5d4d15664b254fc7b58aaa341e22958c20235905105944924","expired":"no expired"}
+2023-08-05T03:59:44.901Z info: /create-transaction - ::1 - ============== Save to DB =============
+2023-08-05T03:59:44.902Z info: /create-transaction - ::1 - Transaction Created
+2023-08-05T04:00:10.715Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-CHGAFAICJF =============
+2023-08-05T04:00:10.715Z info: /check-transaction - ::1 - Data Collected
+2023-08-05T04:25:26.466Z error: /check-id/payment - ::1 - last id from transaction adalah 10 
+2023-08-05T04:25:26.888Z info: /create-transaction - ::1 - [object Object]
+2023-08-05T04:25:26.889Z info: /create-transaction - ::1 - ============== Inisiasi Data =============
+2023-08-05T04:25:26.889Z info: /create-transaction - ::1 - {"name":"icun","email":"tsalisa.na@gmail.com","phone":"628222222","invoice":"INV-NGAHIJI-DDEJECJHFD","amount":56000,"transaction_date":"Sabtu, 5 Agustus 2023 11:25:26","transaction_update":"Sabtu, 5 Agustus 2023 11:25:26","payment_method":"DOKU CHECKOUT","status":"PENDING","product_id":"1","product_name":"Netflix","url_checkout":"https://sandbox.doku.com/checkout/link/f2175e03cf354c2eb59671c97f2bb6d120232505112526888","expired":"no expired"}
+2023-08-05T04:25:26.889Z info: /create-transaction - ::1 - ============== Save to DB =============
+2023-08-05T04:25:26.890Z info: /create-transaction - ::1 - Transaction Created
+2023-08-05T04:25:59.910Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-DDEJECJHFD =============
+2023-08-05T04:25:59.911Z info: /check-transaction - ::1 - Data Collected
