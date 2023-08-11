@@ -40,8 +40,8 @@ router.post('/create-transaction', function (req, res) {
 
     //create signature Hmacsha256 date+words+digest+requesttarget
     let requestTime = notificationHeader['date'];
-    let words = process.env.NGAHIJI_WORDS;
-    let secretKey = process.env.NGAHIJI_SECRETKEY;
+    let words = 'dilla';
+    let secretKey = '080900';
     console.log(notificationBody);
     let requestTarget = "/create-transaction";
     function  digest(notificationBody){
@@ -89,8 +89,8 @@ router.post('/create-transaction', function (req, res) {
             let random = randomData();
             let invoice_number = "INV-NGAHIJI-"+random;
             //check id
-            let words = process.env.NGAHIJI_WORDS;
-            let secretKey = process.env.NGAHIJI_SECRETKEY;
+            let words = 'dilla';
+            let secretKey = '080900';
             let requestTarget = "/check-id";
             function timeStamp(){
                 let date = new Date().toISOString();
@@ -1137,8 +1137,8 @@ router.post('/check-id/:process', function (req, res){
     };
     const notificationHeader = req.headers;
     let requestTime = notificationHeader['date'];
-    let words = process.env.NGAHIJI_WORDS;
-    let secretKey = process.env.NGAHIJI_SECRETKEY;
+    let words = 'dilla';
+    let secretKey = '080900';
     let requestTarget = "/check-id";
         function signature(requestTime, secretKey, words, requestTarget){
             let componentSignature = "date:" + requestTime;
@@ -1212,8 +1212,8 @@ router.post('/product', function(req,res){
         console.log('not null;')
     }
     let requestTime = notificationHeader['date'];
-    let words = process.env.NGAHIJI_WORDS;
-    let secretKey = process.env.NGAHIJI_SECRETKEY;
+    let words = 'dilla';
+    let secretKey = '080900';
     let requestTarget = "/product";
         function signature(requestTime, secretKey, words, requestTarget){
             let componentSignature = "date:" + requestTime;
@@ -1278,8 +1278,8 @@ router.post('/add-user', function (req, res) {
 
     //create signature Hmacsha256 date+words+digest+requesttarget
     let requestTime = notificationHeader['date'];
-    let words = process.env.NGAHIJI_WORDS;
-    let secretKey = process.env.NGAHIJI_SECRETKEY;
+    let words = 'dilla';
+    let secretKey = '080900';
     console.log(notificationBody);
     let requestTarget = "/add-user";
     function  digest(notificationBody){
@@ -1361,8 +1361,8 @@ router.post('/add-user', function (req, res) {
                 res.status(400);
                 res.json(response);
                 }else{
-                    let words = process.env.NGAHIJI_WORDS;
-                    let secretKey = process.env.NGAHIJI_SECRETKEY;
+                    let words = 'dilla';
+                    let secretKey = '080900';
                     let requestTarget = "/check-id";
                     let date = timeStamp();
                     function signature(date, secretKey, words, requestTarget){
@@ -1486,8 +1486,8 @@ router.post('/check-transaction', function(req, res){
    const notificationBody  = JSON.stringify(req.body);
     let invoice_number = req.body.invoice;
     let requestTime = notificationHeader['date'];
-    let words = process.env.NGAHIJI_WORDS;
-    let secretKey = process.env.NGAHIJI_SECRETKEY;
+    let words = 'dilla';
+    let secretKey = '080900';
     console.log(invoice_number);
     console.log(notificationBody);
     let requestTarget = "/check-transaction";
@@ -1669,8 +1669,8 @@ router.post('/notification', function(req, res){
 
                         //add-user
                         console.log('====== add user =======');
-                        let words = process.env.NGAHIJI_WORDS;
-                        let secretKey = process.env.NGAHIJI_SECRETKEY;
+                        let words = 'dilla';
+                        let secretKey = '080900';
                         function timeStamp(){
                             let date = new Date().toISOString();
                             return date.substring(0, 19)+'Z';
@@ -2142,8 +2142,8 @@ router.get('/checkout/:product', function(req, res){
         return date.substring(0, 19)+'Z';
     };
     let requestTime = timeStamp();
-    let words = process.env.NGAHIJI_WORDS;
-    let secretKey = process.env.NGAHIJI_SECRETKEY;
+    let words = 'dilla';
+    let secretKey = '080900';
     let requestTarget = "/product";
     const Body = JSON.stringify({
         id: product_id
@@ -2216,8 +2216,8 @@ router.get('/checkout/:product', function(req, res){
 router.get('/result/:invoice', function(req, res){
     let invoice = req.params.invoice;
     //hit API Check transaction
-    let words = process.env.NGAHIJI_WORDS;
-    let secretKey = process.env.NGAHIJI_SECRETKEY;
+    let words = 'dilla';
+    let secretKey = '080900';
     function timeStamp(){
         let date = new Date().toISOString();
         return date.substring(0, 19)+'Z';
