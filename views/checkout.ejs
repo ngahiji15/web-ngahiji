@@ -142,8 +142,9 @@
 
         let newsignature = createSignature(body);
         prod = 'https://318c-2001-448a-304e-3c57-e492-e276-501d-c2e4.ngrok-free.app';
-        local = 'http://localhost:3000'
-        url = prod+"/create-transaction";
+        local = 'http://localhost:3000';
+        aws = 'http://54.179.117.94/';
+        url = aws+"/create-transaction";
 
         axios.post(url, body, {
                 headers: {

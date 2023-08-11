@@ -125,7 +125,8 @@ router.post('/create-transaction', function (req, res) {
             redirect: 'follow'
             };
 
-            fetch("http://localhost:3000/check-id/payment", requestOptions)
+            let url3 = process.env.PROD_URL + '/check-id/payment';
+            fetch(url3, requestOptions)
             .then(response => response.json())
             .then(result => {
                 let last_id = result.id;
@@ -162,7 +163,8 @@ router.post('/create-transaction', function (req, res) {
             let product_name_checkout = product_name;
             let urlcallbackprod = 'https://318c-2001-448a-304e-3c57-e492-e276-501d-c2e4.ngrok-free.app';
             let urlcallbackstaging = 'http://localhost:3000'
-            let callback_url = urlcallbackprod+'/result/';
+            let urlcallbackaws = process.env.PROD_URL;
+            let callback_url = urlcallbackaws+'/result/';
             let requestTarget = '/checkout/v1/payment'
             let url = 'https://api-sandbox.doku.com'+ requestTarget;
             const body = JSON.stringify({
@@ -1389,7 +1391,8 @@ router.post('/add-user', function (req, res) {
                     redirect: 'follow'
                     };
         
-                    fetch("http://localhost:3000/check-id/customer", requestOptions)
+                    let url4 = process.env.PROD_URL + '/check-id/customer';
+                    fetch(url4, requestOptions)
                     .then(response => response.json())
                     .then(result => {
                         console.log(result);
@@ -1725,7 +1728,8 @@ router.post('/notification', function(req, res){
                         redirect: 'follow'
                         };
 
-                        fetch("http://localhost:3000/add-user", requestOptions)
+                        let url5 = process.env.PROD_URL + '/add-user';
+                        fetch(url5, requestOptions)
                         .then(response => response.json())
                         .then(result => {
                             console.log(result);
@@ -2072,7 +2076,8 @@ router.post('/notification', function(req, res){
                                 redirect: 'follow'
                                 };
 
-                                fetch("http://localhost:3000/notifadmin", requestOptions)
+                                let url6 = process.env.PROD_URL + '/notifadmin';
+                                fetch(url6, requestOptions)
                                 .then(response => response.text())
                                 .then(result => console.log(result))
                                 .catch(error => console.log('error', error));
@@ -2173,7 +2178,9 @@ router.get('/checkout/:product', function(req, res){
     redirect: 'follow'
     };
 
-    fetch("http://localhost:3000/product", requestOptions)
+    let url1 = process.env.PROD_URL + '/product'
+
+    fetch(url1, requestOptions)
     .then(response => response.json())
     .then(result => {
         console.log(result);
@@ -2258,7 +2265,8 @@ router.get('/result/:invoice', function(req, res){
     redirect: 'follow'
     };
 
-    fetch("http://localhost:3000/check-transaction", requestOptions)
+    let url2 = process.env.PROD_URL + '/check-transaction';
+    fetch(url2, requestOptions)
     .then(response => response.json())
     .then(result => {
         console.log(result);
