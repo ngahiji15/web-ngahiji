@@ -39,7 +39,7 @@ router.post('/create-transaction', function (req, res) {
     const product_name = req.body.product_name;
 
     //create signature Hmacsha256 date+words+digest+requesttarget
-    let requestTime = notificationHeader['date'];
+    let requestTime = notificationHeader['datetransaction'];
     let words = 'dilla';
     let secretKey = '080900';
     console.log(notificationBody);
