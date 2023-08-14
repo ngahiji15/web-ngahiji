@@ -171,7 +171,7 @@ router.post('/create-transaction', function (req, res) {
             let invoice_number = "INV-NGAHIJI-"+random;
             let urlcallbackaws = 'http://localhost:3000';
             let urlcallbackhosting = 'https://ngahiji.xyz';
-            let callback_url = urlcallbackaws+'/result/';
+            let callback_url = urlcallbackhosting+'/result/';
             function transactiondate() {
                 d = new Date();
                 Hari = d.getDay();
