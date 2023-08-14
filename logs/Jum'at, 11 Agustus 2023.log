@@ -1,0 +1,161 @@
+2023-08-11T02:20:30.819Z info: Server listening at http://localhost:3000
+2023-08-11T02:23:32.997Z info: Server listening at http://localhost:3000
+2023-08-11T02:24:45.539Z info: Server listening at http://localhost:3000
+2023-08-11T03:59:56.680Z info: Server listening at http://localhost:3000
+2023-08-11T04:08:47.724Z info: Server listening at http://localhost:3000
+2023-08-11T04:09:12.645Z info: Server listening at http://localhost:3000
+2023-08-11T04:10:57.005Z info: Server listening at http://localhost:3000
+2023-08-11T04:11:25.224Z info: Server listening at http://localhost:3000
+2023-08-11T06:56:12.184Z info: Server listening at http://localhost:3000
+2023-08-11T07:05:32.152Z info: Server listening at http://localhost:3000
+2023-08-11T07:10:23.212Z info: Server listening at http://localhost:3000
+2023-08-11T07:14:23.647Z info: Server listening at http://localhost:3000
+2023-08-11T07:14:33.805Z info: /add-user - ::1 - ============== Inisiasi Data User =============
+2023-08-11T07:14:33.805Z info: /add-user - ::1 - {"name":"Test Alif","email":"m.alif@doku.com","phone":"0822222222","invoice":"INV-NGAHIJI-BEAFGHACGH","product_id":4,"product_name":"Spotify","expired":"12 November 2023"}
+2023-08-11T07:14:33.806Z info: /add-user - ::1 - ============== Save to DB =============
+2023-08-11T07:14:33.806Z info: /add-user - ::1 - date:2023-08-11T07:14:33Z
+words:dilla
+Request-Target:/check-id
+2023-08-11T07:14:33.810Z error: /check-id/customer - ::1 - last id from user adalah 8 
+2023-08-11T07:14:33.815Z info: /add-user - ::1 - User has been added
+2023-08-11T07:15:39.101Z info: Server listening at http://localhost:3000
+2023-08-11T07:46:13.208Z info: Server listening at http://localhost:3000
+2023-08-11T07:47:38.887Z info: /add-user - ::1 - ============== Inisiasi Data User =============
+2023-08-11T07:47:38.887Z info: /add-user - ::1 - {"name":"Dilla","email":"nadillarahma08@upi.edu","phone":"62888282828","invoice":"INV-NGAHIJI-BEAFGHACGH","product_id":2,"product_name":"Disney+ Hotstar","expired":"11 September 2023"}
+2023-08-11T07:47:38.887Z info: /add-user - ::1 - ============== Save to DB =============
+2023-08-11T07:47:38.888Z info: /add-user - ::1 - date:2023-08-11T07:47:38Z
+words:dilla
+Request-Target:/check-id
+2023-08-11T07:48:32.524Z info: Server listening at http://localhost:3000
+2023-08-11T07:48:36.720Z info: /add-user - ::1 - ============== Inisiasi Data User =============
+2023-08-11T07:48:36.721Z info: /add-user - ::1 - {"name":"Dilla","email":"nadillarahma08@upi.edu","phone":"62888282828","invoice":"INV-NGAHIJI-BEAFGHACGH","product_id":2,"product_name":"Disney+ Hotstar","expired":"11 September 2023"}
+2023-08-11T07:48:36.721Z info: /add-user - ::1 - ============== Save to DB =============
+2023-08-11T07:48:36.722Z info: /add-user - ::1 - date:2023-08-11T07:48:36Z
+words:dilla
+Request-Target:/check-id
+2023-08-11T07:48:36.740Z error: /check-id/customer - ::1 - last id from user adalah 9 
+2023-08-11T07:48:36.747Z info: /add-user - ::1 - User has been added
+2023-08-11T07:49:08.441Z info: Server listening at http://localhost:3000
+2023-08-11T07:49:12.891Z info: /add-user - ::1 - ============== Inisiasi Data User =============
+2023-08-11T07:49:12.891Z info: /add-user - ::1 - {"name":"Dilla","email":"nadillarahma08@upi.edu","phone":"0888282828","invoice":"INV-NGAHIJI-BEAFGHACGH","product_id":2,"product_name":"Disney+ Hotstar","expired":"11 September 2023"}
+2023-08-11T07:49:12.891Z info: /add-user - ::1 - ============== Save to DB =============
+2023-08-11T07:49:12.891Z info: /add-user - ::1 - date:2023-08-11T07:49:12Z
+words:dilla
+Request-Target:/check-id
+2023-08-11T07:49:12.906Z error: /check-id/customer - ::1 - last id from user adalah 9 
+2023-08-11T07:49:12.913Z info: /add-user - ::1 - User has been added
+2023-08-11T07:58:17.533Z info: Server listening at http://localhost:3000
+2023-08-11T07:58:44.431Z info: Server listening at http://localhost:3000
+2023-08-11T07:58:47.861Z info: /add-user - ::1 - ============== Inisiasi Data User =============
+2023-08-11T07:58:47.861Z info: /add-user - ::1 - {"name":"Dilla","email":"nadillarahma08@upi.edu","phone":"0888282828","invoice":"INV-NGAHIJI-BEAFGHACGH","product_id":2,"product_name":"Disney+ Hotstar","expired":"11 September 2023"}
+2023-08-11T07:58:47.861Z info: /add-user - ::1 - ============== Save to DB =============
+2023-08-11T07:58:47.861Z info: /add-user - ::1 - date:2023-08-11T07:58:47Z
+words:dilla
+Request-Target:/check-id
+2023-08-11T07:58:47.878Z error: /check-id/customer - ::1 - last id from user adalah 10 
+2023-08-11T07:58:47.884Z info: /add-user - ::1 - User has been added
+2023-08-11T07:59:57.810Z info: Server listening at http://localhost:3000
+2023-08-11T08:00:01.396Z info: /add-user - ::1 - ============== Inisiasi Data User =============
+2023-08-11T08:00:01.396Z info: /add-user - ::1 - {"name":"Dilla","email":"nadillarahma08@upi.edu","phone":"0888282828","invoice":"INV-NGAHIJI-BEAFGHACGH","product_id":2,"product_name":"Disney+ Hotstar","expired":"11 September 2023"}
+2023-08-11T08:00:01.396Z info: /add-user - ::1 - ============== Save to DB =============
+2023-08-11T08:00:01.397Z info: /add-user - ::1 - date:2023-08-11T08:00:01Z
+words:dilla
+Request-Target:/check-id
+2023-08-11T08:00:01.412Z error: /check-id/customer - ::1 - last id from user adalah 11 
+2023-08-11T08:00:01.421Z info: /add-user - ::1 - User has been added
+2023-08-11T08:01:38.638Z info: Server listening at http://localhost:3000
+2023-08-11T08:01:42.091Z info: /add-user - ::1 - ============== Inisiasi Data User =============
+2023-08-11T08:01:42.091Z info: /add-user - ::1 - {"name":"test","email":"nadillarahma08@upi.edu","phone":"0888282828","invoice":"INV-NGAHIJI-BEAFGHACGH","product_id":2,"product_name":"Disney+ Hotstar","expired":"11 September 2023"}
+2023-08-11T08:01:42.091Z info: /add-user - ::1 - ============== Save to DB =============
+2023-08-11T08:01:42.092Z info: /add-user - ::1 - date:2023-08-11T08:01:42Z
+words:dilla
+Request-Target:/check-id
+2023-08-11T08:01:42.112Z error: /check-id/customer - ::1 - last id from user adalah 12 
+2023-08-11T08:01:42.121Z info: /add-user - ::1 - User has been added
+2023-08-11T08:05:15.309Z info: Server listening at http://localhost:3000
+2023-08-11T08:05:25.603Z info: /add-user - ::1 - ============== Inisiasi Data User =============
+2023-08-11T08:05:25.603Z info: /add-user - ::1 - {"name":"test","email":"nadillarahma08@upi.edu","phone":"0888282828","invoice":"INV-NGAHIJI-BEAFGHACGH","product_id":2,"product_name":"Disney+ Hotstar","expired":"11 September 2023"}
+2023-08-11T08:05:25.603Z info: /add-user - ::1 - ============== Save to DB =============
+2023-08-11T08:05:59.006Z info: /add-user - ::1 - ============== Inisiasi Data User =============
+2023-08-11T08:05:59.007Z info: /add-user - ::1 - {"name":"test","email":"nadillarahma08@upi.edu","phone":"0888282828","invoice":"INV-NGAHIJI-invoicebaru","product_id":2,"product_name":"Disney+ Hotstar","expired":"11 September 2023"}
+2023-08-11T08:05:59.009Z info: /add-user - ::1 - ============== Save to DB =============
+2023-08-11T08:05:59.013Z info: /add-user - ::1 - date:2023-08-11T08:05:59Z
+words:dilla
+Request-Target:/check-id
+2023-08-11T08:05:59.037Z error: /check-id/customer - ::1 - last id from user adalah 13 
+2023-08-11T08:05:59.044Z info: /add-user - ::1 - User has been added
+2023-08-11T08:06:19.711Z info: /add-user - ::1 - ============== Inisiasi Data User =============
+2023-08-11T08:06:19.711Z info: /add-user - ::1 - {"name":"Test Alif","email":"m.alif@doku.com","phone":"0822222222","invoice":"INV-NGAHIJI-BEAFGHACGH","product_id":4,"product_name":"Spotify","expired":"12 November 2023"}
+2023-08-11T08:06:19.711Z info: /add-user - ::1 - ============== Save to DB =============
+2023-08-11T08:44:21.564Z info: Server listening at http://localhost:3000
+2023-08-11T08:44:55.364Z info: Server listening at http://localhost:3000
+2023-08-11T08:45:03.810Z info: /add-user - ::1 - ============== Inisiasi Data User =============
+2023-08-11T08:45:03.810Z info: /add-user - ::1 - {"name":"test","email":"nadillarahma08@upi.edu","phone":"0888282828","invoice":"INV-NGAHIJI-invoicebaru","product_id":2,"product_name":"Disney+ Hotstar","expired":"11 September 2023"}
+2023-08-11T08:45:03.810Z info: /add-user - ::1 - ============== Save to DB =============
+2023-08-11T08:46:32.589Z info: /add-user - ::1 - ============== Inisiasi Data User =============
+2023-08-11T08:46:32.589Z info: /add-user - ::1 - {"name":"Test Alif","email":"m.alif@doku.com","phone":"0822222222","invoice":"INV-NGAHIJI-BEAFGHACGH","product_id":4,"product_name":"Spotify","expired":"12 November 2023"}
+2023-08-11T08:46:32.589Z info: /add-user - ::1 - ============== Save to DB =============
+2023-08-11T08:47:06.787Z info: Server listening at http://localhost:3000
+2023-08-11T08:47:17.528Z info: /add-user - ::1 - ============== Inisiasi Data User =============
+2023-08-11T08:47:17.528Z info: /add-user - ::1 - {"name":"Test Alif","email":"m.alif@doku.com","phone":"0822222222","invoice":"INV-NGAHIJI-BEAFGHACGH","product_id":4,"product_name":"Spotify","expired":"12 November 2023"}
+2023-08-11T08:47:17.528Z info: /add-user - ::1 - ============== Save to DB =============
+2023-08-11T08:51:53.672Z error: /check-id/payment - ::1 - last id from transaction adalah 20 
+2023-08-11T08:51:54.396Z info: /create-transaction - ::1 - [object Object]
+2023-08-11T08:51:54.397Z info: /create-transaction - ::1 - ============== Inisiasi Data =============
+2023-08-11T08:51:54.397Z info: /create-transaction - ::1 - {"name":"Test Alif","email":"m.alif@doku.com","phone":"0822222222","invoice":"INV-NGAHIJI-EGCAJAFDCE","amount":56000,"transaction_date":"Jum'at, 11 Agustus 2023 15:51:53","transaction_update":"Jum'at, 11 Agustus 2023 15:51:53","payment_method":"DOKU CHECKOUT","status":"PENDING","product_id":"1","product_name":"Netflix","url_checkout":"https://sandbox.doku.com/checkout/link/41564d40a1fd4d0d8b10f38df691a53520235111155154417","expired":"no expired"}
+2023-08-11T08:51:54.397Z info: /create-transaction - ::1 - ============== Save to DB =============
+2023-08-11T08:51:54.398Z info: /create-transaction - ::1 - Transaction Created
+2023-08-11T08:54:11.457Z info: /add-user - ::1 - ============== Inisiasi Data User =============
+2023-08-11T08:54:11.457Z info: /add-user - ::1 - {"name":"Test Alif","email":"m.alif@doku.com","phone":"0822222222","invoice":"INV-NGAHIJI-EGCAJAFDCE","product_id":1,"product_name":"Netflix","expired":"12 September 2023"}
+2023-08-11T08:54:11.457Z info: /add-user - ::1 - ============== Save to DB =============
+2023-08-11T08:54:11.459Z info: /add-user - ::1 - date:2023-08-11T08:54:11Z
+words:dilla
+Request-Target:/check-id
+2023-08-11T08:54:11.461Z error: /check-id/customer - ::1 - last id from user adalah 14 
+2023-08-11T08:54:11.463Z info: /add-user - ::1 - User has been added
+2023-08-11T08:55:17.846Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-EGCAJAFDCE =============
+2023-08-11T08:55:17.846Z info: /check-transaction - ::1 - Data Collected
+2023-08-11T09:00:03.348Z info: /add-user - ::1 - ============== Inisiasi Data User =============
+2023-08-11T09:00:03.348Z info: /add-user - ::1 - {"name":"test","email":"nadillarahma08@upi.edu","phone":"0888282828","invoice":"INV-NGAHIJI-invoicebaruu","product_id":2,"product_name":"Disney+ Hotstar","expired":"11 September 2023"}
+2023-08-11T09:00:03.348Z info: /add-user - ::1 - ============== Save to DB =============
+2023-08-11T09:00:03.353Z info: /add-user - ::1 - date:2023-08-11T09:00:03Z
+words:dilla
+Request-Target:/check-id
+2023-08-11T09:00:03.361Z error: /check-id/customer - ::1 - last id from user adalah 15 
+2023-08-11T09:00:03.363Z info: /add-user - ::1 - User has been added
+2023-08-11T09:00:20.796Z info: Server listening at http://localhost:3000
+2023-08-11T09:00:54.887Z info: /add-user - ::1 - ============== Inisiasi Data User =============
+2023-08-11T09:00:54.887Z info: /add-user - ::1 - {"name":"Test Alif","email":"m.alif@doku.com","phone":"0822222222","invoice":"INV-NGAHIJI-EGCAJAFDCE","product_id":1,"product_name":"Netflix","expired":"12 September 2023"}
+2023-08-11T09:00:54.887Z info: /add-user - ::1 - ============== Save to DB =============
+2023-08-11T09:02:02.394Z info: Server listening at http://localhost:3000
+2023-08-11T09:02:25.246Z error: /check-id/payment - ::1 - last id from transaction adalah 21 
+2023-08-11T09:02:25.883Z info: /create-transaction - ::1 - [object Object]
+2023-08-11T09:02:25.884Z info: /create-transaction - ::1 - ============== Inisiasi Data =============
+2023-08-11T09:02:25.884Z info: /create-transaction - ::1 - {"name":"Test Alif","email":"m.alif@doku.com","phone":"0822222222","invoice":"INV-NGAHIJI-FEEFDFBADJ","amount":56000,"transaction_date":"Jum'at, 11 Agustus 2023 16:2:25","transaction_update":"Jum'at, 11 Agustus 2023 16:2:25","payment_method":"DOKU CHECKOUT","status":"PENDING","product_id":"1","product_name":"Netflix","url_checkout":"https://sandbox.doku.com/checkout/link/60b95d6998284268978737daefb1adf020230211160225910","expired":"no expired"}
+2023-08-11T09:02:25.884Z info: /create-transaction - ::1 - ============== Save to DB =============
+2023-08-11T09:02:25.886Z info: /create-transaction - ::1 - Transaction Created
+2023-08-11T09:02:40.149Z info: /add-user - ::1 - ============== Inisiasi Data User =============
+2023-08-11T09:02:40.149Z info: /add-user - ::1 - {"name":"Test Alif","email":"m.alif@doku.com","phone":"0822222222","invoice":"INV-NGAHIJI-FEEFDFBADJ","product_id":1,"product_name":"Netflix","expired":"12 September 2023"}
+2023-08-11T09:02:40.149Z info: /add-user - ::1 - ============== Save to DB =============
+2023-08-11T09:02:40.150Z info: /add-user - ::1 - date:2023-08-11T09:02:40Z
+words:dilla
+Request-Target:/check-id
+2023-08-11T09:02:40.153Z error: /check-id/customer - ::1 - last id from user adalah 16 
+2023-08-11T09:02:40.155Z info: /add-user - ::1 - User has been added
+2023-08-11T09:29:26.275Z info: Server listening at http://localhost:3000
+2023-08-11T11:53:16.292Z info: Server listening at http://localhost:3000
+2023-08-11T11:55:34.319Z info: Server listening at http://localhost:3000
+2023-08-11T11:56:13.042Z info: Server listening at http://localhost:3000
+2023-08-11T11:56:50.597Z info: Server listening at http://localhost:3000
+2023-08-11T11:59:49.679Z info: Server listening at http://localhost:3000
+2023-08-11T11:59:57.863Z info: Server listening at http://localhost:3000
+2023-08-11T12:00:38.968Z info: Server listening at http://localhost:3000
+2023-08-11T12:02:44.654Z info: Server listening at http://localhost:3000
+2023-08-11T12:02:58.961Z info: Server listening at http://localhost:3000
+2023-08-11T12:05:01.834Z info: Server listening at http://localhost:3000
+2023-08-11T12:05:15.222Z info: Server listening at http://localhost:3000
+2023-08-11T12:05:17.515Z info: Server listening at http://localhost:3000
+2023-08-11T12:08:28.351Z info: Server listening at http://localhost:3000
+2023-08-11T12:08:59.177Z info: /add-user - ::1 - ============== Inisiasi Data User =============
+2023-08-11T12:08:59.178Z info: /add-user - ::1 - {"name":"test","email":"nadillarahma08@upi.edu","phone":"0888282828","invoice":"INV-NGAHIJI-invoicebaruu","product_id":2,"product_name":"Disney+ Hotstar","expired":"11 September 2023"}
+2023-08-11T12:08:59.178Z info: /add-user - ::1 - ============== Save to DB =============

@@ -1,0 +1,120 @@
+2023-08-02T01:03:00.450Z info: Server listening at http://localhost:3000
+2023-08-02T01:04:43.899Z error: /check-id/payment - ::1 - last id from transaction adalah 4 
+2023-08-02T01:04:44.339Z info: /create-transaction - ::1 - [object Object]
+2023-08-02T01:04:44.339Z info: /create-transaction - ::1 - ============== Inisiasi Data =============
+2023-08-02T01:04:44.339Z info: /create-transaction - ::1 - {"name":"Test Alif","email":"m.alif@doku.com","phone":"0822222222","invoice":"INV-NGAHIJI-DGJIHJBAGA","amount":56000,"transaction_date":"Rabu, 2 Agustus 2023 8.4.43","transaction_update":"Rabu, 2 Agustus 2023 8.4.43","payment_method":"DOKU CHECKOUT","status":"PENDING","product_id":"1","product_name":"Netflix","url_checkout":"https://sandbox.doku.com/checkout/link/bac0c729262746e9a5ef793f05ff282420230402080444527","expired":"no expired"}
+2023-08-02T01:04:44.339Z info: /create-transaction - ::1 - ============== Save to DB =============
+2023-08-02T01:04:44.341Z info: /create-transaction - ::1 - Transaction Created
+2023-08-02T01:06:58.288Z info: Server listening at http://localhost:3000
+2023-08-02T01:07:24.058Z info: Server listening at http://localhost:3000
+2023-08-02T01:09:23.371Z info: Server listening at http://localhost:3000
+2023-08-02T01:13:18.035Z info: Server listening at http://localhost:3000
+2023-08-02T02:22:38.212Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-BFCBCFFFHJ =============
+2023-08-02T02:22:38.213Z info: /check-transaction - ::1 - Data Collected
+2023-08-02T02:23:13.799Z info: Server listening at http://localhost:3000
+2023-08-02T02:25:28.463Z info: Server listening at http://localhost:3000
+2023-08-02T02:25:40.624Z info: Server listening at http://localhost:3000
+2023-08-02T02:26:23.527Z info: Server listening at http://localhost:3000
+2023-08-02T02:30:40.658Z info: Server listening at http://localhost:3000
+2023-08-02T02:30:54.147Z info: Server listening at http://localhost:3000
+2023-08-02T02:31:43.946Z info: Server listening at http://localhost:3000
+2023-08-02T02:32:14.671Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-BFCBCFFFHJ =============
+2023-08-02T02:32:14.672Z error: /check-transaction - ::1 - Exception, Invalid Signature
+2023-08-02T02:33:11.798Z info: Server listening at http://localhost:3000
+2023-08-02T02:33:12.593Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-BFCBCFFFHJ =============
+2023-08-02T02:33:12.595Z error: /check-transaction - ::1 - Exception, Invalid Signature
+2023-08-02T02:34:02.212Z info: Server listening at http://localhost:3000
+2023-08-02T02:34:04.627Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-BFCBCFFFHJ =============
+2023-08-02T02:34:04.629Z error: /check-transaction - ::1 - Exception, Invalid Signature
+2023-08-02T02:35:17.963Z info: Server listening at http://localhost:3000
+2023-08-02T02:35:19.478Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-BFCBCFFFHJ =============
+2023-08-02T02:35:19.479Z error: /check-transaction - ::1 - Exception, Invalid Signature
+2023-08-02T02:37:24.787Z info: Server listening at http://localhost:3000
+2023-08-02T02:37:29.860Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-BFCBCFFFHJ =============
+2023-08-02T02:37:29.862Z error: /check-transaction - ::1 - Exception, Invalid Signature
+2023-08-02T02:37:31.583Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-BFCBCFFFHJ =============
+2023-08-02T02:37:31.585Z error: /check-transaction - ::1 - Exception, Invalid Signature
+2023-08-02T02:37:59.960Z info: Server listening at http://localhost:3000
+2023-08-02T02:38:16.838Z info: Server listening at http://localhost:3000
+2023-08-02T02:49:41.445Z info: Server listening at http://localhost:3000
+2023-08-02T02:52:52.396Z info: Server listening at http://localhost:3000
+2023-08-02T03:00:13.190Z info: Server listening at http://localhost:3000
+2023-08-02T03:00:29.967Z info: Server listening at http://localhost:3000
+2023-08-02T03:00:31.054Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-BFCBCFFFHJ =============
+2023-08-02T03:00:31.054Z info: /check-transaction - ::1 - Data Collected
+2023-08-02T03:01:15.353Z info: Server listening at http://localhost:3000
+2023-08-02T03:02:36.314Z info: Server listening at http://localhost:3000
+2023-08-02T03:02:38.428Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-BFCBCFFFHJ =============
+2023-08-02T03:02:38.428Z info: /check-transaction - ::1 - Data Collected
+2023-08-02T03:04:04.696Z info: Server listening at http://localhost:3000
+2023-08-02T03:05:42.098Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-BFCBCFFFHJ =============
+2023-08-02T03:05:42.099Z info: /check-transaction - ::1 - Data Collected
+2023-08-02T03:05:42.183Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-BFCBCFFFHJ =============
+2023-08-02T03:05:42.183Z info: /check-transaction - ::1 - Data Collected
+2023-08-02T03:10:06.459Z info: Server listening at http://localhost:3000
+2023-08-02T03:10:15.700Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-BFCBCFFFHJ =============
+2023-08-02T03:10:15.701Z info: /check-transaction - ::1 - Data Collected
+2023-08-02T03:10:34.599Z info: Server listening at http://localhost:3000
+2023-08-02T03:10:35.451Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-BFCBCFFFHJ =============
+2023-08-02T03:10:35.452Z info: /check-transaction - ::1 - Data Collected
+2023-08-02T03:21:33.479Z info: Server listening at http://localhost:3000
+2023-08-02T03:21:34.343Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-BFCBCFFFHJ =============
+2023-08-02T03:21:34.343Z info: /check-transaction - ::1 - Data Collected
+2023-08-02T03:22:00.138Z info: Server listening at http://localhost:3000
+2023-08-02T03:22:03.264Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-BFCBCFFFHJ =============
+2023-08-02T03:22:03.265Z info: /check-transaction - ::1 - Data Collected
+2023-08-02T03:22:04.587Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-BFCBCFFFHJ =============
+2023-08-02T03:22:04.588Z info: /check-transaction - ::1 - Data Collected
+2023-08-02T03:23:49.283Z info: Server listening at http://localhost:3000
+2023-08-02T03:27:39.070Z info: Server listening at http://localhost:3000
+2023-08-02T03:29:27.420Z info: Server listening at http://localhost:3000
+2023-08-02T03:29:29.713Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-BFCBCFFFHJ =============
+2023-08-02T03:29:29.713Z info: /check-transaction - ::1 - Data Collected
+2023-08-02T03:29:51.680Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-BFCBCFFFHJ =============
+2023-08-02T03:29:51.680Z info: /check-transaction - ::1 - Data Collected
+2023-08-02T08:44:12.060Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-DGJIHJBAGA =============
+2023-08-02T08:44:12.061Z info: /check-transaction - ::1 - Data Collected
+2023-08-02T08:51:06.440Z info: Server listening at http://localhost:3000
+2023-08-02T08:53:08.086Z info: Server listening at http://localhost:3000
+2023-08-02T08:57:10.527Z info: Server listening at http://localhost:3000
+2023-08-02T08:57:21.205Z info: Server listening at http://localhost:3000
+2023-08-02T08:59:04.629Z info: Server listening at http://localhost:3000
+2023-08-02T08:59:21.453Z error: /check-id/payment - ::1 - last id from transaction adalah 5 
+2023-08-02T08:59:22.169Z info: /create-transaction - ::1 - [object Object]
+2023-08-02T08:59:22.170Z info: /create-transaction - ::1 - ============== Inisiasi Data =============
+2023-08-02T08:59:22.171Z info: /create-transaction - ::1 - {"name":"Test Alif","email":"m.alif@doku.com","phone":"0822222222","invoice":"INV-NGAHIJI-IBDEHEAEBD","amount":56000,"transaction_date":"Rabu, 2 Agustus 2023 15:59:21","transaction_update":"Rabu, 2 Agustus 2023 15:59:21","payment_method":"DOKU CHECKOUT","status":"PENDING","product_id":"2","product_name":"Disney+ Hotstar","url_checkout":"https://sandbox.doku.com/checkout/link/c26b58bebee6427c96373c7e4adb1b8220235902155922306","expired":"no expired"}
+2023-08-02T08:59:22.171Z info: /create-transaction - ::1 - ============== Save to DB =============
+2023-08-02T08:59:22.172Z info: /create-transaction - ::1 - Transaction Created
+2023-08-02T09:01:00.621Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-IBDEHEAEBD =============
+2023-08-02T09:01:00.621Z info: /check-transaction - ::1 - Data Collected
+2023-08-02T09:02:34.837Z info: Server listening at http://localhost:3000
+2023-08-02T09:03:05.380Z info: Server listening at http://localhost:3000
+2023-08-02T09:03:49.302Z info: Server listening at http://localhost:3000
+2023-08-02T09:13:15.655Z info: Server listening at http://localhost:3000
+2023-08-02T09:13:31.388Z info: Server listening at http://localhost:3000
+2023-08-02T09:14:59.855Z info: Server listening at http://localhost:3000
+2023-08-02T09:15:08.602Z info: Server listening at http://localhost:3000
+2023-08-02T09:16:51.091Z info: Server listening at http://localhost:3000
+2023-08-02T09:24:14.319Z info: Server listening at http://localhost:3000
+2023-08-02T09:24:57.046Z info: Server listening at http://localhost:3000
+2023-08-02T09:30:24.684Z error: /check-id/payment - ::1 - last id from transaction adalah 6 
+2023-08-02T09:30:25.431Z info: /create-transaction - ::1 - [object Object]
+2023-08-02T09:30:25.432Z info: /create-transaction - ::1 - ============== Inisiasi Data =============
+2023-08-02T09:30:25.432Z info: /create-transaction - ::1 - {"name":"Muhammad Alif Assidiq","email":"ashddq.work@gmail.com","phone":"82222222","invoice":"INV-NGAHIJI-JCGDCCHCHI","amount":56000,"transaction_date":"Rabu, 2 Agustus 2023 16:30:24","transaction_update":"Rabu, 2 Agustus 2023 16:30:24","payment_method":"DOKU CHECKOUT","status":"PENDING","product_id":"2","product_name":"Disney+ Hotstar","url_checkout":"https://sandbox.doku.com/checkout/link/164b53c2819546d7a5e6c7e0636fb8ce20233002163025493","expired":"no expired"}
+2023-08-02T09:30:25.432Z info: /create-transaction - ::1 - ============== Save to DB =============
+2023-08-02T09:30:25.434Z info: /create-transaction - ::1 - Transaction Created
+2023-08-02T09:32:07.472Z info: Server listening at http://localhost:3000
+2023-08-02T09:34:41.565Z info: Server listening at http://localhost:3000
+2023-08-02T10:47:08.848Z info: Server listening at http://localhost:3000
+2023-08-02T11:29:55.336Z error: /check-id/payment - ::1 - last id from transaction adalah 7 
+2023-08-02T11:29:56.085Z info: /create-transaction - ::1 - [object Object]
+2023-08-02T11:29:56.085Z info: /create-transaction - ::1 - ============== Inisiasi Data =============
+2023-08-02T11:29:56.086Z info: /create-transaction - ::1 - {"name":"Test Alif","email":"m.alif@doku.com","phone":"0822222222","invoice":"INV-NGAHIJI-CBFDABFHHF","amount":56000,"transaction_date":"Rabu, 2 Agustus 2023 18:29:55","transaction_update":"Rabu, 2 Agustus 2023 18:29:55","payment_method":"DOKU CHECKOUT","status":"PENDING","product_id":"2","product_name":"Disney+ Hotstar","url_checkout":"https://sandbox.doku.com/checkout/link/52785211860048f4914a18bb7ddf412b20232902182956182","expired":"no expired"}
+2023-08-02T11:29:56.086Z info: /create-transaction - ::1 - ============== Save to DB =============
+2023-08-02T11:29:56.087Z info: /create-transaction - ::1 - Transaction Created
+2023-08-02T11:31:40.025Z info: Server listening at http://localhost:3000
+2023-08-02T11:32:33.457Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-CBFDABFHHF =============
+2023-08-02T11:32:33.457Z info: /check-transaction - ::1 - Data Collected
+2023-08-02T11:35:36.571Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-CBFDABFHHF =============
+2023-08-02T11:35:36.572Z info: /check-transaction - ::1 - Data Collected
+2023-08-02T15:05:10.241Z info: Server listening at http://localhost:3000

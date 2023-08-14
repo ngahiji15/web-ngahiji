@@ -1,0 +1,56 @@
+2023-08-04T06:37:03.477Z info: Server listening at http://localhost:3000
+2023-08-04T10:38:07.487Z info: Server listening at http://localhost:3000
+2023-08-04T10:39:28.884Z info: Server listening at http://localhost:3000
+2023-08-04T10:40:35.108Z info: Server listening at http://localhost:3000
+2023-08-04T10:42:25.890Z info: Server listening at http://localhost:3000
+2023-08-04T10:43:28.197Z info: Server listening at http://localhost:3000
+2023-08-04T10:44:50.216Z info: Server listening at http://localhost:3000
+2023-08-04T11:19:48.681Z info: Server listening at http://localhost:3000
+2023-08-04T11:24:59.182Z info: Server listening at http://localhost:3000
+2023-08-04T11:25:22.122Z info: Server listening at http://localhost:3000
+2023-08-04T11:25:48.355Z info: Server listening at http://localhost:3000
+2023-08-04T11:26:48.150Z info: Server listening at http://localhost:3000
+2023-08-04T11:27:19.620Z info: Server listening at http://localhost:3000
+2023-08-04T11:28:55.182Z info: Server listening at http://localhost:3000
+2023-08-04T11:30:18.775Z info: Server listening at http://localhost:3000
+2023-08-04T11:32:01.136Z error: /check-id/payment - ::1 - last id from transaction adalah 8 
+2023-08-04T11:32:01.715Z info: /create-transaction - ::1 - [object Object]
+2023-08-04T11:32:01.715Z info: /create-transaction - ::1 - ============== Inisiasi Data =============
+2023-08-04T11:32:01.715Z info: /create-transaction - ::1 - {"name":"Muhammad Alif Assidiq","email":"ashddq.work@gmail.com","phone":"6282223631214","invoice":"INV-NGAHIJI-DIECCFJCDA","amount":56000,"transaction_date":"Jum'at, 4 Agustus 2023 18:32:1","transaction_update":"Jum'at, 4 Agustus 2023 18:32:1","payment_method":"DOKU CHECKOUT","status":"PENDING","product_id":"3","product_name":"Youtube Premium","url_checkout":"https://sandbox.doku.com/checkout/link/e9f3e71834d3449f978e0428955e3e7320233204183201776","expired":"no expired"}
+2023-08-04T11:32:01.715Z info: /create-transaction - ::1 - ============== Save to DB =============
+2023-08-04T11:32:01.716Z info: /create-transaction - ::1 - Transaction Created
+2023-08-04T11:32:34.440Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-DIECCFJCDA =============
+2023-08-04T11:32:34.441Z info: /check-transaction - ::1 - Data Collected
+2023-08-04T11:44:50.561Z info: Server listening at http://localhost:3000
+2023-08-04T12:26:59.496Z info: Server listening at http://localhost:3000
+2023-08-04T12:28:39.270Z info: Server listening at http://localhost:3000
+2023-08-04T12:29:03.853Z info: Server listening at http://localhost:3000
+2023-08-04T12:29:45.395Z info: Server listening at http://localhost:3000
+2023-08-04T12:30:12.804Z info: Server listening at http://localhost:3000
+2023-08-04T12:30:28.258Z info: Server listening at http://localhost:3000
+2023-08-04T12:31:56.850Z info: Server listening at http://localhost:3000
+2023-08-04T12:32:11.287Z info: Server listening at http://localhost:3000
+2023-08-04T12:32:26.708Z info: Server listening at http://localhost:3000
+2023-08-04T12:32:48.834Z info: Server listening at http://localhost:3000
+2023-08-04T12:32:56.872Z info: Server listening at http://localhost:3000
+2023-08-04T12:34:21.010Z info: Server listening at http://localhost:3000
+2023-08-04T13:33:01.737Z info: Server listening at http://localhost:3000
+2023-08-04T13:33:18.017Z info: Server listening at http://localhost:3000
+2023-08-04T13:35:24.120Z info: Server listening at http://localhost:3000
+2023-08-04T13:35:47.795Z info: Server listening at http://localhost:3000
+2023-08-04T13:35:59.751Z info: Server listening at http://localhost:3000
+2023-08-04T13:36:21.314Z info: Server listening at http://localhost:3000
+2023-08-04T13:36:39.884Z info: Server listening at http://localhost:3000
+2023-08-04T13:37:07.784Z info: Server listening at http://localhost:3000
+2023-08-04T13:37:22.788Z info: Server listening at http://localhost:3000
+2023-08-04T13:37:59.983Z info: Server listening at http://localhost:3000
+2023-08-04T13:38:10.159Z info: Server listening at http://localhost:3000
+2023-08-04T13:38:18.839Z info: Server listening at http://localhost:3000
+2023-08-04T13:39:57.299Z info: Server listening at http://localhost:3000
+2023-08-04T13:39:59.496Z info: Server listening at http://localhost:3000
+2023-08-04T13:41:51.176Z info: Server listening at http://localhost:3000
+2023-08-04T13:42:17.521Z info: Server listening at http://localhost:3000
+2023-08-04T13:43:17.967Z info: Server listening at http://localhost:3000
+2023-08-04T13:43:47.401Z info: Server listening at http://localhost:3000
+2023-08-04T13:43:56.215Z info: Server listening at http://localhost:3000
+2023-08-04T13:45:25.920Z info: Server listening at http://localhost:3000
