@@ -1732,8 +1732,8 @@ router.get('/result/:invoice', function(req, res){
     body: raw,
     redirect: 'follow'
     };
-
-    let url2 = 'http://localhost:3000' + '/check-transaction';
+    let urlcallbackhosting = 'https://ngahiji.xyz';
+    let url2 = urlcallbackhosting + '/check-transaction';
     fetch(url2, requestOptions)
     .then(response => response.json())
     .then(result => {
