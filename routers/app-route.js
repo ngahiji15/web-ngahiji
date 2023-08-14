@@ -25,7 +25,6 @@ router.get('/testenv', function (req, res) {
 
 //API
 
-//API CREATE TRANSACTION
 router.post('/create-transaction', function (req, res) {
     const notificationHeader = req.headers;
     const notificationBody  = JSON.stringify(req.body);
@@ -132,9 +131,47 @@ router.post('/create-transaction', function (req, res) {
                 let last_id = result.id;
                 console.log(last_id);
                 if(last_id == 1){
-                let last_id = 1 + 1;
-            
-            //create transaction_date
+                var new_id = 1 + 1;
+                }else if (last_id > 1){
+                var new_id = last_id + 1;
+                }else if (last_id < 1){
+                var new_id = last_id + 1;
+                }else{
+                    const response = {
+                        status:  'Failed',
+                        message:  'Error! Please Check Your Code!'
+                    };
+                    res.status(501);
+                    res.json(response);
+                    console.log('Invalid Signature');
+                    logger.error(`${req.originalUrl} - ${req.ip} - Exception, Please Check Your Code!`);
+                }
+                //xendit checkout
+                function authenticateUser(user, password){
+                    var token = user + ":" + password;
+                    var hash = btoa(token);
+        
+                    return "Basic " + hash;
+                };
+                let userprod = 'xnd_production_mgLjR8teaeHNRWS4ignx0geUPdEW8q8JSwdzMeIxKctZwtq7XKzClefirFAbj';
+                let usersatging = 'xnd_development_VANcrBN1Ij02PFeYpo2JmGKZkt9p27Nxn2UpwACARx1PjvOfY5Ob32fjSHcEI8r'
+                let pass = ''
+            let authorization = authenticateUser(usersatging,pass);
+            console.log(authorization);
+            function randomData(){
+                let result           = '';
+                let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                let charactersLength = 10;
+                for ( let i = 0; i < charactersLength; i++ ) {
+                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+                }
+                return result;
+            }
+            let random = randomData();
+            let invoice_number = "INV-NGAHIJI-"+random;
+            let urlcallbackaws = 'http://localhost:3000';
+            let urlcallbackhosting = 'https://ngahiji.xyz';
+            let callback_url = urlcallbackaws+'/result/';
             function transactiondate() {
                 d = new Date();
                 Hari = d.getDay();
@@ -148,977 +185,441 @@ router.post('/create-transaction', function (req, res) {
                 arrHari = ["Minggu","Senin","Selasa","Rabu","Kamis","Jum'at","Sabtu"];
                 let transactiondate1 = arrHari[Hari] + ', ' + Tanggal + ' ' + arrbulan[Bulan] + ' ' + Tahun + ' ' + Jam +':'+ Menit +':'+ Detik;
                 return transactiondate1
-               }
+            }
             let transaction_date = transactiondate();
-            //create url checkout
-            let clientId = process.env.JOKUL_CLIENTID;
-            let secretKey = process.env.JOKUL_KEY;
-            function timeStamp(){
-                let date = new Date().toISOString();
-                return date.substring(0, 19)+'Z';
-            }
-            let newtimeStamp = timeStamp();
-            let product_name_checkout = product_name;
-            let urlcallbackprod = 'https://318c-2001-448a-304e-3c57-e492-e276-501d-c2e4.ngrok-free.app';
-            let urlcallbackstaging = 'http://localhost:3000'
-            let urlcallbackaws = process.env.PROD_URL;
-            let urlcallbackhosting = 'https://ngahiji.xyz';
-            let callback_url = urlcallbackhosting+'/result/';
-            let requestTarget = '/checkout/v1/payment'
-            let jokulurlprod = 'https://api.doku.com';
-            let jokulurlstaging = 'https://api-sandbox.doku.com';
-            let url = jokulurlprod + requestTarget;
-            const body = JSON.stringify({
-                order: {
-                    amount: amount,
-                    invoice_number: invoice_number,
-                    callback_url: callback_url+invoice_number,
-                    line_items: [
-                        {
-                            id: product_id,
-                            name: product_name,
-                            quantity: 1,
-                            price: amount,
-                            sku: "FF01",
-                            category: "gift-and-flowers",
-                            url: "http://doku.com/",
-                            image_url: "http://doku.com/",
-                            type: "ABC"
-                        }
-                    ]
+            var axios = require('axios');
+                var data = JSON.stringify({
+                "external_id": invoice_number,
+                "amount": amount,
+                "payer_email": email,
+                "description": product_name,
+                "customer": {
+                    "given_names": "Ngahiji",
+                    "surname": name,
+                    "email": email,
+                    "mobile_number": phone,
+                    "addresses": [
+                    {
+                        "city": "Jakarta Selatan",
+                        "country": "Indonesia",
+                        "postal_code": "12345",
+                        "state": "Daerah Khusus Ibukota Jakarta",
+                        "street_line1": "Jalan Makan",
+                        "street_line2": "Kecamatan Kebayoran Baru"
+                    }]},
+                "success_redirect_url": callback_url+invoice_number,
+                "failure_redirect_url": callback_url+invoice_number
+                });
+        
+                var config = {
+                method: 'post',
+                url: 'https://api.xendit.co/v2/invoices',
+                headers: { 
+                    'Content-Type': 'application/json', 
+                    'Authorization': authorization
                 },
-                payment: {
-                    payment_due_date: 60
-                },
-                customer: {
-                    id: "CUST-NGAHJI-"+invoice_number,
-                    name: name,
-                    email: email,
-                    phone: phone,
-                    address: "taman setiabudi",
-                    postcode: "120129",
-                    state: "Jakarta",
-                    city: "Jakarta Selatan",
-                    country: "ID"
-                },
-                billing_address :{
-                    first_name: "Ngahiji",
-                    last_name: "Platform",
-                    address: "Jalan Raya Laswi",
-                    city: "Bandung",
-                    postal_code:"40381",
-                    phone: "082223631214",
-                    country_code: "IDN"
-                },
-                shipping_address: {
-                    first_name: "Ngahiji",
-                    last_name: "Platform",
-                    address: "Jalan Raya Laswi",
-                    city: "Bandung",
-                    postal_code:"40381",
-                    phone: "082223631214",
-                    country_code: "IDN"
-                },
-                override_configuration: {
-                    themes: {
-                    language: "EN",
-                    background_color: "2B3036",
-                    font_color: "ffffff",
-                    button_background_color: "ffffff",
-                    button_font_color: "2B3036"
+                data : data
+                };
+        
+                axios(config)
+                .then(function (response) {
+                let urlinv = response.data.invoice_url
+                console.log(JSON.stringify(response.data)),
+                console.log(new_id);
+                logger.info(`${req.originalUrl} - ${req.ip} - ============== Inisiasi Data =============`);
+                let new_name = req.body.name;
+                let new_invoice_number = invoice_number;
+                let new_amount = req.body.amount;
+                let new_transaction_date = transaction_date;
+                let transaction_update = transaction_date;
+                let payment_method = "XENDIT CHECKOUT";
+                let status = "PENDING";
+                let new_email = req.body.email;
+                let new_phone = req.body.phone;
+                let new_product_id = req.body.product_id;
+                let new_product_name = req.body.product_name;
+                let url_checkout = urlinv;
+                let expired = "no expired";
+
+                const init_data = JSON.stringify({
+                    name: new_name,
+                    email: new_email,
+                    phone: new_phone,
+                    invoice: new_invoice_number,
+                    amount: new_amount,
+                    transaction_date: new_transaction_date,
+                    transaction_update: transaction_update,
+                    payment_method: payment_method,
+                    status: status,
+                    product_id: new_product_id,
+                    product_name: new_product_name,
+                    url_checkout: url_checkout,
+                    expired: expired
+                });
+
+                logger.info(`${req.originalUrl} - ${req.ip} - ${init_data}`);
+
+
+                logger.info(`${req.originalUrl} - ${req.ip} - ============== Save to DB =============`);
+                const sql = "INSERT INTO transaction(id,invoice_number,amount,transaction_date,transaction_update,payment_method,status,name,email,phone,product_id,product_name,expired,url_checkout) VALUES ?";
+                const values = [[new_id,new_invoice_number,new_amount,new_transaction_date,transaction_update,payment_method,status,new_name,new_email,new_phone,new_product_id,new_product_name,expired,url_checkout]];
+                db.query(sql, [values],function (err, result) {
+                    if (err) throw err;
+                    console.log("Number of records inserted: " + result.affectedRows);
+                // let name = result[0]['name'];
+                // let id = result[0]['id'];
+                const transporter = nodemailer.createTransport({
+                    host: "smtp.hostinger.com",
+                    port: 465,
+                    secure: true,
+                    auth: {
+                        // TODO: replace `user` and `pass` values from <https://forwardemail.net>
+                        user: 'cs@ngahiji.xyz',
+                        pass: 'F261396ff.'
                     }
-                },
-                additional_info: {
-                    doku_wallet_notify_url: urlcallbackhosting+'/notification',
-                    info1: product_name_checkout
-                }
-            });
-            function  digest(body){
-                let jsonStringHash256 = crypto
-                .createHash('sha256')
-                .update(body, 'utf-8')
-                .digest()
-
-                let bufferFromJsonStringHash256 = Buffer.from(jsonStringHash256)
-                return bufferFromJsonStringHash256.toString('base64')
-            }
-            let newdigest = digest(body);
-
-            function signature(clientId, secretKey, requestId, requestTime, requestTarget, newdigest){
-                let componentSignature = "Client-Id:" + clientId;
-                componentSignature += "\n";
-                componentSignature += "Request-Id:" + requestId;
-                componentSignature += "\n";
-                componentSignature += "Request-Timestamp:" + requestTime;
-                componentSignature += "\n";
-                componentSignature += "Request-Target:" + requestTarget;
-
-                // If body not send when access API with HTTP method GET/DELETE
-                if (digest) {
-                    componentSignature += "\n";
-                    componentSignature += "Digest:" + newdigest;
-                }
-
-                let hmac256Value = crypto.createHmac('sha256', secretKey)
-                            .update(componentSignature.toString())
-                            .digest();
-
-                let bufferFromHmac256Value = Buffer.from(hmac256Value);
-                let signature = bufferFromHmac256Value.toString('base64');
-
-                // Prepend encoded result with algorithm info HMACSHA256=
-                return "HMACSHA256="+signature
-            }
-
-            let newsignature = signature(clientId, secretKey, random, newtimeStamp, requestTarget, newdigest)
-            //const paymenturl = [];
-
-                            const paymenturl = fetch(url, {
-                                method: 'POST', 
-                                headers:{
-                                'Accept': 'application/json',
-                                'Content-Type': 'application/json',
-                                'Client-Id': clientId,
-                                'Request-Id': random,
-                                'Request-Timestamp': newtimeStamp,
-                                'Signature': newsignature
-                                }, 
-                                // Kita kirim data tadi sebagai body
-                                body: body
-                            })
-                            .then(res => res.json())
-                            .then(data => {
-                                const paymenturl = data.response.payment.url;
-                                console.log(paymenturl);
-                                console.log(last_id);
-                                logger.info(`${req.originalUrl} - ${req.ip} - ============== Inisiasi Data =============`);
-                                let new_name = req.body.name;
-                                let new_invoice_number = invoice_number;
-                                let new_amount = req.body.amount;
-                                let new_transaction_date = transaction_date;
-                                let transaction_update = transaction_date;
-                                let payment_method = "DOKU CHECKOUT";
-                                let status = "PENDING";
-                                let new_email = req.body.email;
-                                let new_phone = req.body.phone;
-                                let new_product_id = req.body.product_id;
-                                let new_product_name = req.body.product_name;
-                                let url_checkout = paymenturl;
-                                let expired = "no expired";
-
-                                const init_data = JSON.stringify({
-                                    name: new_name,
-                                    email: new_email,
-                                    phone: new_phone,
-                                    invoice: new_invoice_number,
-                                    amount: new_amount,
-                                    transaction_date: new_transaction_date,
-                                    transaction_update: transaction_update,
-                                    payment_method: payment_method,
-                                    status: status,
-                                    product_id: new_product_id,
-                                    product_name: new_product_name,
-                                    url_checkout: url_checkout,
-                                    expired: expired
-                                });
-
-                                logger.info(`${req.originalUrl} - ${req.ip} - ${init_data}`);
-
-
-                                logger.info(`${req.originalUrl} - ${req.ip} - ============== Save to DB =============`);
-                                const sql = "INSERT INTO transaction(id,invoice_number,amount,transaction_date,transaction_update,payment_method,status,name,email,phone,product_id,product_name,expired,url_checkout) VALUES ?";
-                                const values = [[last_id,new_invoice_number,new_amount,new_transaction_date,transaction_update,payment_method,status,new_name,new_email,new_phone,new_product_id,new_product_name,expired,url_checkout]];
-                                db.query(sql, [values],function (err, result) {
-                                    if (err) throw err;
-                                    console.log("Number of records inserted: " + result.affectedRows);
-                                // let name = result[0]['name'];
-                                // let id = result[0]['id'];
-
-                                    const response = {
-                                        status:  'Success',
-                                        message:  'Transaction has been created',
-                                        url: url_checkout
-                                    };
-                                    res.status(201);
-                                    res.json(response);
-                                });
-                                logger.info(`${req.originalUrl} - ${req.ip} - Transaction Created`);
-                            })
-            //send email
-                            
-            //send wa
-                           
-                        }else if (last_id > 1){
-                            let newlast_id = last_id + 1;
-                            function transactiondate() {
-                                d = new Date();
-                                Hari = d.getDay();
-                                Tanggal = d.getDate();
-                                Bulan = d.getMonth();
-                                Tahun = d.getFullYear();
-                                Jam = d.getHours();
-                                Menit = d.getMinutes();
-                                Detik = d.getSeconds();
-                                arrbulan = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
-                                arrHari = ["Minggu","Senin","Selasa","Rabu","Kamis","Jum'at","Sabtu"];
-                                let transactiondate1 = arrHari[Hari] + ', ' + Tanggal + ' ' + arrbulan[Bulan] + ' ' + Tahun + ' ' + Jam +':'+ Menit +':'+ Detik;
-                                return transactiondate1
-                               }
-                            let transaction_date = transactiondate();
-                            //create url checkout
-                            let clientId = 'BRN-0215-1691805110427';
-                            let secretKey = 'SK-S2MCHOMyROwPXinPmGqG';
-                            function timeStamp(){
-                                let date = new Date().toISOString();
-                                return date.substring(0, 19)+'Z';
-                            }
-                            let product_name_checkout = product_name;
-                            let newtimeStamp = timeStamp()
-                            let urlcallbackprod = 'https://318c-2001-448a-304e-3c57-e492-e276-501d-c2e4.ngrok-free.app';
-                            let urlcallbackstaging = 'http://localhost:3000'
-                            let urlcallbackaws = process.env.PROD_URL;
-                            let urlcallbackhosting = 'https://ngahiji.xyz';
-                            let callback_url = urlcallbackhosting+'/result/';
-                            let requestTarget = '/checkout/v1/payment'
-                            let jokulurlprod = 'https://api.doku.com';
-                            let jokulurlstaging = 'https://api-sandbox.doku.com';
-                            let url = jokulurlprod + requestTarget;
-                            const body = JSON.stringify({
-                                order: {
-                                    amount: amount,
-                                    invoice_number: invoice_number,
-                                    callback_url: callback_url+invoice_number,
-                                    line_items: [
-                                        {
-                                            id: product_id,
-                                            name: product_name,
-                                            quantity: 1,
-                                            price: amount,
-                                            sku: "FF01",
-                                            category: "gift-and-flowers",
-                                            url: "http://doku.com/",
-                                            image_url: "http://doku.com/",
-                                            type: "ABC"
-                                        }
-                                    ]
-                                },
-                                payment: {
-                                    payment_due_date: 60
-                                },
-                                customer: {
-                                    id: "CUST-NGAHJI-"+invoice_number,
-                                    name: name,
-                                    email: email,
-                                    phone: phone,
-                                    address: "taman setiabudi",
-                                    postcode: "120129",
-                                    state: "Jakarta",
-                                    city: "Jakarta Selatan",
-                                    country: "ID"
-                                },
-                                billing_address :{
-                                    first_name: "Ngahiji",
-                                    last_name: "Platform",
-                                    address: "Jalan Raya Laswi",
-                                    city: "Bandung",
-                                    postal_code:"40381",
-                                    phone: "082223631214",
-                                    country_code: "IDN"
-                                },
-                                shipping_address: {
-                                    first_name: "Ngahiji",
-                                    last_name: "Platform",
-                                    address: "Jalan Raya Laswi",
-                                    city: "Bandung",
-                                    postal_code:"40381",
-                                    phone: "082223631214",
-                                    country_code: "IDN"
-                                },
-                                override_configuration: {
-                                    themes: {
-                                    language: "EN",
-                                    background_color: "2B3036",
-                                    font_color: "ffffff",
-                                    button_background_color: "ffffff",
-                                    button_font_color: "2B3036"
+                    });
+                    let urlpayment1 = url_checkout;
+                    let invoice1 = new_invoice_number
+                    let name1 = new_name;
+                    let email1 = new_email;
+                    let layanan1 = product_name;
+                    let date1 = new_transaction_date;
+                    
+                    // async..await is not allowed in global scope, must use a wrapper
+                    // send mail with defined transport object
+                    var mailOptions = {
+                        from: 'Ngahiji Customer Service<cs@ngahiji.xyz>',
+                        to: email1,
+                        subject: 'Pengingat Pembayaran.',
+                        html: `
+                        <!DOCTYPE html>
+                        <html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="en">
+                        
+                        <head>
+                            <title></title>
+                            <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0"><!--[if mso]><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch><o:AllowPNG/></o:OfficeDocumentSettings></xml><![endif]--><!--[if !mso]><!-->
+                            <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"><!--<![endif]-->
+                            <style>
+                                * {
+                                    box-sizing: border-box;
+                                }
+                        
+                                body {
+                                    margin: 0;
+                                    padding: 0;
+                                }
+                        
+                                a[x-apple-data-detectors] {
+                                    color: inherit !important;
+                                    text-decoration: inherit !important;
+                                }
+                        
+                                #MessageViewBody a {
+                                    color: inherit;
+                                    text-decoration: none;
+                                }
+                        
+                                p {
+                                    line-height: inherit
+                                }
+                        
+                                .desktop_hide,
+                                .desktop_hide table {
+                                    mso-hide: all;
+                                    display: none;
+                                    max-height: 0px;
+                                    overflow: hidden;
+                                }
+                        
+                                .image_block img+div {
+                                    display: none;
+                                }
+                        
+                                @media (max-width:620px) {
+                        
+                                    .desktop_hide table.icons-inner,
+                                    .social_block.desktop_hide .social-table {
+                                        display: inline-block !important;
                                     }
-                                },
-                                additional_info: { 
-                                    doku_wallet_notify_url: urlcallbackhosting+'/notification',
-                                    info1: product_name_checkout
+                        
+                                    .icons-inner {
+                                        text-align: center;
+                                    }
+                        
+                                    .icons-inner td {
+                                        margin: 0 auto;
+                                    }
+                        
+                                    .image_block img.fullWidth {
+                                        max-width: 100% !important;
+                                    }
+                        
+                                    .mobile_hide {
+                                        display: none;
+                                    }
+                        
+                                    .row-content {
+                                        width: 100% !important;
+                                    }
+                        
+                                    .stack .column {
+                                        width: 100%;
+                                        display: block;
+                                    }
+                        
+                                    .mobile_hide {
+                                        min-height: 0;
+                                        max-height: 0;
+                                        max-width: 0;
+                                        overflow: hidden;
+                                        font-size: 0px;
+                                    }
+                        
+                                    .desktop_hide,
+                                    .desktop_hide table {
+                                        display: table !important;
+                                        max-height: none !important;
+                                    }
                                 }
-                            });
-                            function  digest(body){
-                                let jsonStringHash256 = crypto
-                                .createHash('sha256')
-                                .update(body, 'utf-8')
-                                .digest()
-                
-                                let bufferFromJsonStringHash256 = Buffer.from(jsonStringHash256)
-                                return bufferFromJsonStringHash256.toString('base64')
-                            }
-                            let newdigest = digest(body);
-                
-                            function signature(clientId, secretKey, requestId, requestTime, requestTarget, newdigest){
-                                let componentSignature = "Client-Id:" + clientId;
-                                componentSignature += "\n";
-                                componentSignature += "Request-Id:" + requestId;
-                                componentSignature += "\n";
-                                componentSignature += "Request-Timestamp:" + requestTime;
-                                componentSignature += "\n";
-                                componentSignature += "Request-Target:" + requestTarget;
-                
-                                // If body not send when access API with HTTP method GET/DELETE
-                                if (digest) {
-                                    componentSignature += "\n";
-                                    componentSignature += "Digest:" + newdigest;
-                                }
-                
-                                let hmac256Value = crypto.createHmac('sha256', secretKey)
-                                            .update(componentSignature.toString())
-                                            .digest();
-                
-                                let bufferFromHmac256Value = Buffer.from(hmac256Value);
-                                let signature = bufferFromHmac256Value.toString('base64');
-                
-                                // Prepend encoded result with algorithm info HMACSHA256=
-                                return "HMACSHA256="+signature
-                            }
-                
-                            let newsignature = signature(clientId, secretKey, random, newtimeStamp, requestTarget, newdigest)
-                            //const paymenturl = [];
-                
-                                            const paymenturl = fetch(url, {
-                                                method: 'POST', 
-                                                headers:{
-                                                'Accept': 'application/json',
-                                                'Content-Type': 'application/json',
-                                                'Client-Id': clientId,
-                                                'Request-Id': random,
-                                                'Request-Timestamp': newtimeStamp,
-                                                'Signature': newsignature
-                                                }, 
-                                                // Kita kirim data tadi sebagai body
-                                                body: body
-                                            })
-                                            .then(res => res.json())
-                                            .then(data => {
-                                                console.log(data);
-                                                logger.info(`${req.originalUrl} - ${req.ip} - ${data}`);
-                                                var paymenturl = data.response.payment.url;
-                                                console.log(paymenturl);
-                                                console.log(newlast_id);
-                                                logger.info(`${req.originalUrl} - ${req.ip} - ============== Inisiasi Data =============`);
-                                                let new_name = req.body.name;
-                                                let new_invoice_number = invoice_number;
-                                                let new_amount = req.body.amount;
-                                                let new_transaction_date = transaction_date;
-                                                let transaction_update = transaction_date;
-                                                let payment_method = "DOKU CHECKOUT";
-                                                let status = "PENDING";
-                                                let new_email = req.body.email;
-                                                let new_phone = req.body.phone;
-                                                let new_product_id = req.body.product_id;
-                                                let new_product_name = req.body.product_name;
-                                                let url_checkout = paymenturl;
-                                                let expired = "no expired";
-                
-                                                const init_data = JSON.stringify({
-                                                    name: new_name,
-                                                    email: new_email,
-                                                    phone: new_phone,
-                                                    invoice: new_invoice_number,
-                                                    amount: new_amount,
-                                                    transaction_date: new_transaction_date,
-                                                    transaction_update: transaction_update,
-                                                    payment_method: payment_method,
-                                                    status: status,
-                                                    product_id: new_product_id,
-                                                    product_name: new_product_name,
-                                                    url_checkout: url_checkout,
-                                                    expired: expired
-                                                });
-                
-                                                logger.info(`${req.originalUrl} - ${req.ip} - ${init_data}`);
-                
-                
-                                                logger.info(`${req.originalUrl} - ${req.ip} - ============== Save to DB =============`);
-                                                const sql = "INSERT INTO transaction(id,invoice_number,amount,transaction_date,transaction_update,payment_method,status,name,email,phone,product_id,product_name,expired,url_checkout) VALUES ?";
-                                                const values = [[newlast_id,new_invoice_number,new_amount,new_transaction_date,transaction_update,payment_method,status,new_name,new_email,new_phone,new_product_id,new_product_name,expired,url_checkout]];
-                                                db.query(sql, [values],function (err, result) {
-                                                    if (err) throw err;
-                                                    console.log("Number of records inserted: " + result.affectedRows);
-                                                // let name = result[0]['name'];
-                                                // let id = result[0]['id'];
-                                                const transporter = nodemailer.createTransport({
-                                                    host: "smtp.hostinger.com",
-                                                    port: 465,
-                                                    secure: true,
-                                                    auth: {
-                                                      // TODO: replace `user` and `pass` values from <https://forwardemail.net>
-                                                      user: 'cs@ngahiji.xyz',
-                                                      pass: 'F261396ff.'
-                                                    }
-                                                  });
-                                                  let urlpayment1 = url_checkout;
-                                                  let invoice1 = new_invoice_number
-                                                  let name1 = new_name;
-                                                  let email1 = new_email;
-                                                  let layanan1 = product_name;
-                                                  let date1 = new_transaction_date;
-                                                  
-                                                  // async..await is not allowed in global scope, must use a wrapper
-                                                    // send mail with defined transport object
-                                                    var mailOptions = {
-                                                        from: 'Ngahiji Customer Service<cs@ngahiji.xyz>',
-                                                        to: email1,
-                                                        subject: 'Pengingat Pembayaran.',
-                                                        html: `
-                                                        <!DOCTYPE html>
-                                                        <html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="en">
-                                                        
-                                                        <head>
-                                                            <title></title>
-                                                            <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-                                                            <meta name="viewport" content="width=device-width, initial-scale=1.0"><!--[if mso]><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch><o:AllowPNG/></o:OfficeDocumentSettings></xml><![endif]--><!--[if !mso]><!-->
-                                                            <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css"><!--<![endif]-->
-                                                            <style>
-                                                                * {
-                                                                    box-sizing: border-box;
-                                                                }
-                                                        
-                                                                body {
-                                                                    margin: 0;
-                                                                    padding: 0;
-                                                                }
-                                                        
-                                                                a[x-apple-data-detectors] {
-                                                                    color: inherit !important;
-                                                                    text-decoration: inherit !important;
-                                                                }
-                                                        
-                                                                #MessageViewBody a {
-                                                                    color: inherit;
-                                                                    text-decoration: none;
-                                                                }
-                                                        
-                                                                p {
-                                                                    line-height: inherit
-                                                                }
-                                                        
-                                                                .desktop_hide,
-                                                                .desktop_hide table {
-                                                                    mso-hide: all;
-                                                                    display: none;
-                                                                    max-height: 0px;
-                                                                    overflow: hidden;
-                                                                }
-                                                        
-                                                                .image_block img+div {
-                                                                    display: none;
-                                                                }
-                                                        
-                                                                @media (max-width:620px) {
-                                                        
-                                                                    .desktop_hide table.icons-inner,
-                                                                    .social_block.desktop_hide .social-table {
-                                                                        display: inline-block !important;
-                                                                    }
-                                                        
-                                                                    .icons-inner {
-                                                                        text-align: center;
-                                                                    }
-                                                        
-                                                                    .icons-inner td {
-                                                                        margin: 0 auto;
-                                                                    }
-                                                        
-                                                                    .image_block img.fullWidth {
-                                                                        max-width: 100% !important;
-                                                                    }
-                                                        
-                                                                    .mobile_hide {
-                                                                        display: none;
-                                                                    }
-                                                        
-                                                                    .row-content {
-                                                                        width: 100% !important;
-                                                                    }
-                                                        
-                                                                    .stack .column {
-                                                                        width: 100%;
-                                                                        display: block;
-                                                                    }
-                                                        
-                                                                    .mobile_hide {
-                                                                        min-height: 0;
-                                                                        max-height: 0;
-                                                                        max-width: 0;
-                                                                        overflow: hidden;
-                                                                        font-size: 0px;
-                                                                    }
-                                                        
-                                                                    .desktop_hide,
-                                                                    .desktop_hide table {
-                                                                        display: table !important;
-                                                                        max-height: none !important;
-                                                                    }
-                                                                }
-                                                            </style>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-                                                                <symbol id="one" viewBox="0 0 16 16">
-                                                                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2Zm7.283 4.002V12H7.971V5.338h-.065L6.072 6.656V5.385l1.899-1.383h1.312Z"/>
-                                                                  </symbol>
-                                                                </svg>
-                                                        </head>
-                                                        
-                                                        <body style="background-color: #e2eace; margin: 0; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">
-                                                            <table class="nl-container" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #e2eace;">
+                            </style>
+                            <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                                <symbol id="one" viewBox="0 0 16 16">
+                                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2Zm7.283 4.002V12H7.971V5.338h-.065L6.072 6.656V5.385l1.899-1.383h1.312Z"/>
+                                    </symbol>
+                                </svg>
+                        </head>
+                        
+                        <body style="background-color: #e2eace; margin: 0; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">
+                            <table class="nl-container" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #e2eace;">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <table class="row row-1" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #000; width: 600px; margin: 0 auto;" width="600">
                                                                 <tbody>
                                                                     <tr>
-                                                                        <td>
-                                                                            <table class="row row-1" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-                                                                                <tbody>
-                                                                                    <tr>
-                                                                                        <td>
-                                                                                            <table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #000; width: 600px; margin: 0 auto;" width="600">
-                                                                                                <tbody>
-                                                                                                    <tr>
-                                                                                                        <td class="column column-1" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-                                                                                                            <table class="image_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-                                                                                                                <tr>
-                                                                                                                    <td class="pad" style="padding-top:25px;width:100%;padding-right:0px;padding-left:0px;">
-                                                                                                                        <div class="alignment" align="center" style="line-height:10px"><img class="fullWidth" src="https://d1oco4z2z1fhwp.cloudfront.net/templates/default/20/rounder-up.png" style="display: block; height: auto; border: 0; max-width: 600px; width: 100%;" width="600" alt="Image" title="Image"></div>
-                                                                                                                    </td>
-                                                                                                                </tr>
-                                                                                                            </table>
-                                                                                                        </td>
-                                                                                                    </tr>
-                                                                                                </tbody>
-                                                                                            </table>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                </tbody>
-                                                                            </table>
-                                                                            <table class="row row-2" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-                                                                                <tbody>
-                                                                                    <tr>
-                                                                                        <td>
-                                                                                            <table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #fff; color: #000; width: 600px; margin: 0 auto;" width="600">
-                                                                                                <tbody>
-                                                                                                    <tr>
-                                                                                                        <td class="column column-1" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-                                                                                                            <table class="image_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-                                                                                                                <tr>
-                                                                                                                    <td class="pad" style="width:100%;padding-right:0px;padding-left:0px;">
-                                                                                                                        <div class="alignment" align="center" style="line-height:10px">
-                                                                                                                        </div>
-                                                                                                                    </td>
-                                                                                                                </tr>
-                                                                                                            </table>
-                                                                                                        </td>
-                                                                                                    </tr>
-                                                                                                </tbody>
-                                                                                            </table>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                </tbody>
-                                                                            </table>
-                                                                            <table class="row row-3" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-                                                                                <tbody>
-                                                                                    <tr>
-                                                                                        <td>
-                                                                                            <table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #fff; color: #000; width: 600px; margin: 0 auto;" width="600">
-                                                                                                <tbody>
-                                                                                                    <tr>
-                                                                                                        <td class="column column-1" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-                                                                                                            <table class="text_block block-1" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
-                                                                                                                <tr>
-                                                                                                                    <td class="pad">
-                                                                                                                        <div style="font-family: sans-serif">
-                                                                                                                            <div class style="font-size: 12px; font-family: 'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; mso-line-height-alt: 14.399999999999999px; color: #0D0D0D; line-height: 1.2;">
-                                                                                                                                <p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 16.8px;"><span style="font-size:28px;"><strong><span style="font-size:28px;">Hello ${name1},</span></strong></span><br><span style="font-size:28px;">pesananmu berhasil dibuat.</span></p>
-                                                                                                                            </div>
-                                                                                                                        </div>
-                                                                                                                    </td>
-                                                                                                                </tr>
-                                                                                                            </table>
-                                                                                                            <table class="image_block block-2" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-                                                                                                                <tr>
-                                                                                                                    <td class="pad" style="width:100%;padding-right:0px;padding-left:0px;">
-                                                                                                                        <div class="alignment" align="center" style="line-height:10px"><img src="https://d1oco4z2z1fhwp.cloudfront.net/templates/default/20/divider.png" style="display: block; height: auto; border: 0; max-width: 316px; width: 100%;" width="316" alt="Image" title="Image"></div>
-                                                                                                                    </td>
-                                                                                                                </tr>
-                                                                                                            </table>
-                                                                                                            <table class="text_block block-3" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
-                                                                                                                <tr>
-                                                                                                                    <td class="pad">
-                                                                                                                        <div style="font-family: sans-serif">
-                                                                                                                            <div class style="font-size: 12px; font-family: 'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; mso-line-height-alt: 18px; color: #555555; line-height: 1.5;">
-                                                                                                                                <p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 21px;">Invoice : <span style="color:#000000;font-size:14px;"><strong>${invoice1}<br></strong></span>Layanan : <span style="color:#000000;font-size:14px;"><strong>${layanan1}<br></strong></span>Waktu : <span style="color:#000000;font-size:14px;"><strong>${date1}<br></strong></span></p>
-                                                                                                                            </div>
-                                                                                                                        </div>
-                                                                                                                    </td>
-                                                                                                                </tr>
-                                                                                                            </table>
-                                                                                                            <table class="text_block block-4" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
-                                                                                                                <tr>
-                                                                                                                    <td class="pad" style="padding-bottom:10px;padding-left:10px;padding-right:10px;padding-top:20px;">
-                                                                                                                        <div style="font-family: sans-serif">
-                                                                                                                            <div class style="font-size: 12px; font-family: 'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; mso-line-height-alt: 18px; color: #0D0D0D; line-height: 1.5;">
-                                                                                                                                <p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 21px;">Yuk selesaikan pembayaranmu.<br>klik tombol di bawah ini untuk melakukan pembayaran.</p>
-                                                                                                                            </div>
-                                                                                                                        </div>
-                                                                                                                    </td>
-                                                                                                                </tr>
-                                                                                                            </table>
-                                                                                                            <table class="button_block block-5" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-                                                                                                                <tr>
-                                                                                                                    <td class="pad" style="padding-bottom:10px;padding-left:10px;padding-right:10px;padding-top:25px;text-align:center;">
-                                                                                                                        <div class="alignment" align="center"><!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" style="height:62px;width:204px;v-text-anchor:middle;" arcsize="7%" stroke="false" fillcolor="#a8bf6f"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#ffffff; font-family:'Trebuchet MS', Tahoma, sans-serif; font-size:16px"><![endif]-->
-                                                                                                                            <div style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#000000;border-radius:4px;width:auto;border-top:0px solid transparent;font-weight:undefined;border-right:0px solid transparent;border-bottom:0px solid transparent;border-left:0px solid transparent;padding-top:15px;padding-bottom:15px;font-family:'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:15px;padding-right:15px;font-size:16px;display:inline-block;letter-spacing:normal;"><a href="${urlpayment1}"><span style="word-break: break-word; line-height: 32px; color: #ffffff;">Selesaikan Pembayaran.</span></a></span></div><!--[if mso]></center></v:textbox></v:roundrect><![endif]-->
-                                                                                                                        </div>
-                                                                                                                    </td>
-                                                                                                                </tr>
-                                                                                                            </table>
-                                                                                                            <div class="spacer_block block-6" style="height:40px;line-height:40px;font-size:1px;">&#8202;</div>
-                                                                                                        </td>
-                                                                                                    </tr>
-                                                                                                </tbody>
-                                                                                            </table>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                </tbody>
-                                                                            </table>
-                                                                            <table class="row row-4" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-                                                                                <tbody>
-                                                                                    <tr>
-                                                                                        <td>
-                                                                                            <table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #525252; color: #000; width: 600px; margin: 0 auto;" width="600">
-                                                                                                <tbody>
-                                                                                                    <tr>
-                                                                                                        <td class="column column-1" width="33.333333333333336%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-                                                                                                            
-                                                                                                        </td>
-                                                                                                        <td class="column column-2" width="33.333333333333336%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-                                                                                                            <table class="text_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
-                                                                                                                <tr>
-                                                                                                                    <td class="pad" style="padding-top:20px;">
-                                                                                                                        <div style="font-family: sans-serif">
-                                                                                                                            <div class style="font-size: 12px; font-family: 'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; mso-line-height-alt: 14.399999999999999px; color: #a8bf6f; line-height: 1.2;">
-                                                                                                                                <p style="margin: 0; font-size: 12px; text-align: center; mso-line-height-alt: 14.399999999999999px;"><span style="color:#ffffff;font-size:12px;"><span style="font-size:12px;color:#ffffff;">@2023 Ngahiji 1.0.0</span></span><br><span style="color:#ffffff;font-size:12px;"><span style="font-size:12px;color:#ffffff;">cs@ngahiji.xyz</span></span><br></p>
-                                                                                                                            </div>
-                                                                                                                        </div>
-                                                                                                                    </td>
-                                                                                                                </tr>
-                                                                                                            </table>
-                                                                                                        </td>
-                                                                                                        <td class="column column-3" width="33.333333333333336%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-                                                                                                        </td>
-                                                                                                    </tr>
-                                                                                                </tbody>
-                                                                                            </table>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                </tbody>
-                                                                            </table>
-                                                                            <table class="row row-5" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-                                                                                <tbody>
-                                                                                    <tr>
-                                                                                        <td>
-                                                                                            <table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #000; width: 600px; margin: 0 auto;" width="600">
-                                                                                                <tbody>
-                                                                                                    <tr>
-                                                                                                        <td class="column column-1" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-                                                                                                            <table class="image_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-                                                                                                                <tr>
-                                                                                                                    <td class="pad" style="width:100%;padding-right:0px;padding-left:0px;">
-                                                                                                                        <div class="alignment" align="center" style="line-height:10px"><img class="fullWidth" src="https://d1oco4z2z1fhwp.cloudfront.net/templates/default/20/rounder-dwn.png" style="display: block; height: auto; border: 0; max-width: 600px; width: 100%;" width="600" alt="Image" title="Image"></div>
-                                                                                                                    </td>
-                                                                                                                </tr>
-                                                                                                            </table>
-                                                                                                            <div class="spacer_block block-2" style="height:60px;line-height:60px;font-size:1px;">&#8202;</div>
-                                                                                                        </td>
-                                                                                                    </tr>
-                                                                                                </tbody>
-                                                                                            </table>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                </tbody>
-                                                                            </table>
-                                                                            <table class="row row-6" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-                                                                                <tbody>
-                                                                                    <tr>
-                                                                                        <td>
-                                                                                            <table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #000; width: 600px; margin: 0 auto;" width="600">
-                                                                                                <tbody>
-                                                                                                    <tr>
-                                                                                                        <td class="column column-1" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
-                                                                                                            <table class="icons_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-                                                                                                                <tr>
-                                                                                                                    <td class="pad" style="vertical-align: middle; color: #9d9d9d; font-family: inherit; font-size: 15px; padding-bottom: 5px; padding-top: 5px; text-align: center;">
-                                                                                                                        <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-                                                                                                                            <tr>
-                                                                                                                                <td class="alignment" style="vertical-align: middle; text-align: center;"><!--[if vml]><table align="left" cellpadding="0" cellspacing="0" role="presentation" style="display:inline-block;padding-left:0px;padding-right:0px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"><![endif]-->
-                                                                                                                                    <!--[if !vml]><!-->
-                                                                                                                                </td>
-                                                                                                                            </tr>
-                                                                                                                        </table>
-                                                                                                                    </td>
-                                                                                                                </tr>
-                                                                                                            </table>
-                                                                                                        </td>
-                                                                                                    </tr>
-                                                                                                </tbody>
-                                                                                            </table>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                </tbody>
+                                                                        <td class="column column-1" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
+                                                                            <table class="image_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                                                                                <tr>
+                                                                                    <td class="pad" style="padding-top:25px;width:100%;padding-right:0px;padding-left:0px;">
+                                                                                        <div class="alignment" align="center" style="line-height:10px"><img class="fullWidth" src="https://d1oco4z2z1fhwp.cloudfront.net/templates/default/20/rounder-up.png" style="display: block; height: auto; border: 0; max-width: 600px; width: 100%;" width="600" alt="Image" title="Image"></div>
+                                                                                    </td>
+                                                                                </tr>
                                                                             </table>
                                                                         </td>
                                                                     </tr>
                                                                 </tbody>
-                                                            </table><!-- End -->
-                                                        </body>
-                                                        
-                                                        </html>`
-                                                    };
-                                                    
-                                                    transporter.sendMail(mailOptions, (err, info) => {
-                                                        if (err) throw err;
-                                                        console.log('Email sent: ' + info.response);
-                                                    });
-                                                    const response = {
-                                                        status:  'Success',
-                                                        message:  'Transaction has been created',
-                                                        url: url_checkout
-                                                    };
-                                                    res.status(201);
-                                                    res.json(response);
-                                                });
-                                                logger.info(`${req.originalUrl} - ${req.ip} - Transaction Created`);
-                                            })
-                        }else if (last_id < 1){
-                            let newlast_id = last_id + 1;
-                            function transactiondate() {
-                                d = new Date();
-                                Hari = d.getDay();
-                                Tanggal = d.getDate();
-                                Bulan = d.getMonth();
-                                Tahun = d.getFullYear();
-                                Jam = d.getHours();
-                                Menit = d.getMinutes();
-                                Detik = d.getSeconds();
-                                arrbulan = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
-                                arrHari = ["Minggu","Senin","Selasa","Rabu","Kamis","Jum'at","Sabtu"];
-                                let transactiondate1 = arrHari[Hari] + ', ' + Tanggal + ' ' + arrbulan[Bulan] + ' ' + Tahun + ' ' + Jam +':'+ Menit +':'+ Detik;
-                                return transactiondate1
-                               }
-                            let transaction_date = transactiondate();
-                            //create url checkout
-                            let clientId = 'BRN-0215-1691805110427';
-                            let secretKey = 'SK-S2MCHOMyROwPXinPmGqG';
-                            function timeStamp(){
-                                let date = new Date().toISOString();
-                                return date.substring(0, 19)+'Z';
-                            }
-                            let newtimeStamp = timeStamp();
-                            let product_name_checkout = product_name;
-                            let urlcallbackaws = process.env.PROD_URL;
-                            let urlcallbackhosting = 'https://ngahiji.xyz';
-                            let callback_url = urlcallbackhosting+'/result/';
-                            let requestTarget = '/checkout/v1/payment'
-                            let jokulurlprod = 'https://api.doku.com';
-                            let jokulurlstaging = 'https://api-sandbox.doku.com';
-                            let url = jokulurlprod + requestTarget;
-                            const body = JSON.stringify({
-                                order: {
-                                    amount: amount,
-                                    invoice_number: invoice_number,
-                                    callback_url: callback_url+invoice_number,
-                                    line_items: [
-                                        {
-                                            id: product_id,
-                                            name: product_name,
-                                            quantity: 1,
-                                            price: amount,
-                                            sku: "FF01",
-                                            category: "gift-and-flowers",
-                                            url: "http://doku.com/",
-                                            image_url: "http://doku.com/",
-                                            type: "ABC"
-                                        }
-                                    ]
-                                },
-                                payment: {
-                                    payment_due_date: 60
-                                },
-                                customer: {
-                                    id: "CUST-NGAHJI-"+invoice_number,
-                                    name: name,
-                                    email: email,
-                                    phone: phone,
-                                    address: "taman setiabudi",
-                                    postcode: "120129",
-                                    state: "Jakarta",
-                                    city: "Jakarta Selatan",
-                                    country: "ID"
-                                },
-                                billing_address :{
-                                    first_name: "Ngahiji",
-                                    last_name: "Platform",
-                                    address: "Jalan Raya Laswi",
-                                    city: "Bandung",
-                                    postal_code:"40381",
-                                    phone: "082223631214",
-                                    country_code: "IDN"
-                                },
-                                shipping_address: {
-                                    first_name: "Ngahiji",
-                                    last_name: "Platform",
-                                    address: "Jalan Raya Laswi",
-                                    city: "Bandung",
-                                    postal_code:"40381",
-                                    phone: "082223631214",
-                                    country_code: "IDN"
-                                },
-                                override_configuration: {
-                                    themes: {
-                                    language: "EN",
-                                    background_color: "2B3036",
-                                    font_color: "ffffff",
-                                    button_background_color: "ffffff",
-                                    button_font_color: "2B3036"
-                                    }
-                                },
-                                additional_info: {
-                                    doku_wallet_notify_url: urlcallbackhosting+'/notification',
-                                    info1: product_name_checkout
-                                }
-                            });
-                            function  digest(body){
-                                let jsonStringHash256 = crypto
-                                .createHash('sha256')
-                                .update(body, 'utf-8')
-                                .digest()
-                
-                                let bufferFromJsonStringHash256 = Buffer.from(jsonStringHash256)
-                                return bufferFromJsonStringHash256.toString('base64')
-                            }
-                            let newdigest = digest(body);
-                
-                            function signature(clientId, secretKey, requestId, requestTime, requestTarget, newdigest){
-                                let componentSignature = "Client-Id:" + clientId;
-                                componentSignature += "\n";
-                                componentSignature += "Request-Id:" + requestId;
-                                componentSignature += "\n";
-                                componentSignature += "Request-Timestamp:" + requestTime;
-                                componentSignature += "\n";
-                                componentSignature += "Request-Target:" + requestTarget;
-                
-                                // If body not send when access API with HTTP method GET/DELETE
-                                if (digest) {
-                                    componentSignature += "\n";
-                                    componentSignature += "Digest:" + newdigest;
-                                }
-                
-                                let hmac256Value = crypto.createHmac('sha256', secretKey)
-                                            .update(componentSignature.toString())
-                                            .digest();
-                
-                                let bufferFromHmac256Value = Buffer.from(hmac256Value);
-                                let signature = bufferFromHmac256Value.toString('base64');
-                
-                                // Prepend encoded result with algorithm info HMACSHA256=
-                                return "HMACSHA256="+signature
-                            }
-                
-                            let newsignature = signature(clientId, secretKey, random, newtimeStamp, requestTarget, newdigest)
-                            //const paymenturl = [];
-                
-                                            const paymenturl = fetch(url, {
-                                                method: 'POST', 
-                                                headers:{
-                                                'Accept': 'application/json',
-                                                'Content-Type': 'application/json',
-                                                'Client-Id': clientId,
-                                                'Request-Id': random,
-                                                'Request-Timestamp': newtimeStamp,
-                                                'Signature': newsignature
-                                                }, 
-                                                // Kita kirim data tadi sebagai body
-                                                body: body
-                                            })
-                                            .then(res => res.json())
-                                            .then(data => {
-                                                console.log(data);
-                                                logger.info(`${req.originalUrl} - ${req.ip} - ${data}`);
-                                                var paymenturl = data.response.payment.url;
-                                                console.log(paymenturl);
-                                                console.log(newlast_id);
-                                                logger.info(`${req.originalUrl} - ${req.ip} - ============== Inisiasi Data =============`);
-                                                let new_name = req.body.name;
-                                                let new_invoice_number = invoice_number;
-                                                let new_amount = req.body.amount;
-                                                let new_transaction_date = transaction_date;
-                                                let transaction_update = transaction_date;
-                                                let payment_method = "DOKU CHECKOUT";
-                                                let status = "PENDING";
-                                                let new_email = req.body.email;
-                                                let new_phone = req.body.phone;
-                                                let new_product_id = req.body.product_id;
-                                                let new_product_name = req.body.product_name;
-                                                let url_checkout = paymenturl;
-                                                let expired = "no expired";
-                
-                                                const init_data = JSON.stringify({
-                                                    name: new_name,
-                                                    email: new_email,
-                                                    phone: new_phone,
-                                                    invoice: new_invoice_number,
-                                                    amount: new_amount,
-                                                    transaction_date: new_transaction_date,
-                                                    transaction_update: transaction_update,
-                                                    payment_method: payment_method,
-                                                    status: status,
-                                                    product_id: new_product_id,
-                                                    product_name: new_product_name,
-                                                    url_checkout: url_checkout,
-                                                    expired: expired
-                                                });
-                
-                                                logger.info(`${req.originalUrl} - ${req.ip} - ${init_data}`);
-                
-                
-                                                logger.info(`${req.originalUrl} - ${req.ip} - ============== Save to DB =============`);
-                                                const sql = "INSERT INTO transaction(id,invoice_number,amount,transaction_date,transaction_update,payment_method,status,name,email,phone,product_id,product_name,expired,url_checkout) VALUES ?";
-                                                const values = [[newlast_id,new_invoice_number,new_amount,new_transaction_date,transaction_update,payment_method,status,new_name,new_email,new_phone,new_product_id,new_product_name,expired,url_checkout]];
-                                                db.query(sql, [values],function (err, result) {
-                                                    if (err) throw err;
-                                                    console.log("Number of records inserted: " + result.affectedRows);
-                                                // let name = result[0]['name'];
-                                                // let id = result[0]['id'];
-                                                    const response = {
-                                                        status:  'Success',
-                                                        message:  'Transaction has been created',
-                                                        url: url_checkout
-                                                    };
-                                                    res.status(201);
-                                                    res.json(response);
-                                                });
-                                                logger.info(`${req.originalUrl} - ${req.ip} - Transaction Created`);
-                                            })
-                        }else{
-                            const response = {
-                                status:  'Failed',
-                                message:  'Error! Please Check Your Code!'
-                            };
-                            res.status(501);
-                            res.json(response);
-                            console.log('Invalid Signature');
-                            logger.error(`${req.originalUrl} - ${req.ip} - Exception, Please Check Your Code!`);
-                        }
-                    })
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <table class="row row-2" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #fff; color: #000; width: 600px; margin: 0 auto;" width="600">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="column column-1" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
+                                                                            <table class="image_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                                                                                <tr>
+                                                                                    <td class="pad" style="width:100%;padding-right:0px;padding-left:0px;">
+                                                                                        <div class="alignment" align="center" style="line-height:10px">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <table class="row row-3" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #fff; color: #000; width: 600px; margin: 0 auto;" width="600">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="column column-1" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
+                                                                            <table class="text_block block-1" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
+                                                                                <tr>
+                                                                                    <td class="pad">
+                                                                                        <div style="font-family: sans-serif">
+                                                                                            <div class style="font-size: 12px; font-family: 'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; mso-line-height-alt: 14.399999999999999px; color: #0D0D0D; line-height: 1.2;">
+                                                                                                <p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 16.8px;"><span style="font-size:28px;"><strong><span style="font-size:28px;">Hello ${name1},</span></strong></span><br><span style="font-size:28px;">pesananmu berhasil dibuat.</span></p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                            <table class="image_block block-2" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                                                                                <tr>
+                                                                                    <td class="pad" style="width:100%;padding-right:0px;padding-left:0px;">
+                                                                                        <div class="alignment" align="center" style="line-height:10px"><img src="https://d1oco4z2z1fhwp.cloudfront.net/templates/default/20/divider.png" style="display: block; height: auto; border: 0; max-width: 316px; width: 100%;" width="316" alt="Image" title="Image"></div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                            <table class="text_block block-3" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
+                                                                                <tr>
+                                                                                    <td class="pad">
+                                                                                        <div style="font-family: sans-serif">
+                                                                                            <div class style="font-size: 12px; font-family: 'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; mso-line-height-alt: 18px; color: #555555; line-height: 1.5;">
+                                                                                                <p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 21px;">Invoice : <span style="color:#000000;font-size:14px;"><strong>${invoice1}<br></strong></span>Layanan : <span style="color:#000000;font-size:14px;"><strong>${layanan1}<br></strong></span>Waktu : <span style="color:#000000;font-size:14px;"><strong>${date1}<br></strong></span></p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                            <table class="text_block block-4" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
+                                                                                <tr>
+                                                                                    <td class="pad" style="padding-bottom:10px;padding-left:10px;padding-right:10px;padding-top:20px;">
+                                                                                        <div style="font-family: sans-serif">
+                                                                                            <div class style="font-size: 12px; font-family: 'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; mso-line-height-alt: 18px; color: #0D0D0D; line-height: 1.5;">
+                                                                                                <p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 21px;">Yuk selesaikan pembayaranmu.<br>klik tombol di bawah ini untuk melakukan pembayaran.</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                            <table class="button_block block-5" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                                                                                <tr>
+                                                                                    <td class="pad" style="padding-bottom:10px;padding-left:10px;padding-right:10px;padding-top:25px;text-align:center;">
+                                                                                        <div class="alignment" align="center"><!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" style="height:62px;width:204px;v-text-anchor:middle;" arcsize="7%" stroke="false" fillcolor="#a8bf6f"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#ffffff; font-family:'Trebuchet MS', Tahoma, sans-serif; font-size:16px"><![endif]-->
+                                                                                            <div style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#000000;border-radius:4px;width:auto;border-top:0px solid transparent;font-weight:undefined;border-right:0px solid transparent;border-bottom:0px solid transparent;border-left:0px solid transparent;padding-top:15px;padding-bottom:15px;font-family:'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:15px;padding-right:15px;font-size:16px;display:inline-block;letter-spacing:normal;"><a href="${urlpayment1}"><span style="word-break: break-word; line-height: 32px; color: #ffffff;">Selesaikan Pembayaran.</span></a></span></div><!--[if mso]></center></v:textbox></v:roundrect><![endif]-->
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                            <div class="spacer_block block-6" style="height:40px;line-height:40px;font-size:1px;">&#8202;</div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <table class="row row-4" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #525252; color: #000; width: 600px; margin: 0 auto;" width="600">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="column column-1" width="33.333333333333336%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
+                                                                            
+                                                                        </td>
+                                                                        <td class="column column-2" width="33.333333333333336%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
+                                                                            <table class="text_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
+                                                                                <tr>
+                                                                                    <td class="pad" style="padding-top:20px;">
+                                                                                        <div style="font-family: sans-serif">
+                                                                                            <div class style="font-size: 12px; font-family: 'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; mso-line-height-alt: 14.399999999999999px; color: #a8bf6f; line-height: 1.2;">
+                                                                                                <p style="margin: 0; font-size: 12px; text-align: center; mso-line-height-alt: 14.399999999999999px;"><span style="color:#ffffff;font-size:12px;"><span style="font-size:12px;color:#ffffff;">@2023 Ngahiji 1.0.0</span></span><br><span style="color:#ffffff;font-size:12px;"><span style="font-size:12px;color:#ffffff;">cs@ngahiji.xyz</span></span><br></p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
+                                                                        <td class="column column-3" width="33.333333333333336%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <table class="row row-5" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #000; width: 600px; margin: 0 auto;" width="600">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="column column-1" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
+                                                                            <table class="image_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                                                                                <tr>
+                                                                                    <td class="pad" style="width:100%;padding-right:0px;padding-left:0px;">
+                                                                                        <div class="alignment" align="center" style="line-height:10px"><img class="fullWidth" src="https://d1oco4z2z1fhwp.cloudfront.net/templates/default/20/rounder-dwn.png" style="display: block; height: auto; border: 0; max-width: 600px; width: 100%;" width="600" alt="Image" title="Image"></div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                            <div class="spacer_block block-2" style="height:60px;line-height:60px;font-size:1px;">&#8202;</div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <table class="row row-6" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #000; width: 600px; margin: 0 auto;" width="600">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="column column-1" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;">
+                                                                            <table class="icons_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                                                                                <tr>
+                                                                                    <td class="pad" style="vertical-align: middle; color: #9d9d9d; font-family: inherit; font-size: 15px; padding-bottom: 5px; padding-top: 5px; text-align: center;">
+                                                                                        <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                                                                                            <tr>
+                                                                                                <td class="alignment" style="vertical-align: middle; text-align: center;"><!--[if vml]><table align="left" cellpadding="0" cellspacing="0" role="presentation" style="display:inline-block;padding-left:0px;padding-right:0px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"><![endif]-->
+                                                                                                    <!--[if !vml]><!-->
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </table>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table><!-- End -->
+                        </body>
+                        
+                        </html>`
+                    };
+                    
+                    transporter.sendMail(mailOptions, (err, info) => {
+                        if (err) throw err;
+                        console.log('Email sent: ' + info.response);
+                    });
+                    const response = {
+                        status:  'Success',
+                        message:  'Transaction has been created',
+                        url: url_checkout
+                    };
+                    res.status(201);
+                    res.json(response);
+                });
+                logger.info(`${req.originalUrl} - ${req.ip} - Transaction Created`);
+                })
+                .catch(function (error) {
+                console.log(error);
+                });
+                })
             .catch(error => console.log('error', error));
         }else{
             const response = {
@@ -1563,52 +1064,19 @@ router.post('/check-transaction', function(req, res){
 
 router.post('/notification', function(req, res){
     const notificationHeader = req.headers;
-    const notificationBody  = JSON.stringify(req.body, null, 2);
-    console.log(notificationBody);
-    let requestTarget = '/notification';
-   let secretKey = process.env.JOKUL_KEY;
-    let clientId = notificationHeader['client-id']
-    let requestTime = notificationHeader['request-timestamp']
-    let requestId = notificationHeader['request-id']
-    function  digest(notificationBody){
-    let jsonStringHash256 = crypto
-      .createHash('sha256')
-      .update(notificationBody, 'utf-8')
-      .digest()
-    return jsonStringHash256.toString('base64')
-  }
-  let newdigest = digest(notificationBody);
-    function signature(clientId, secretKey, requestId, requestTime, requestTarget, newdigest){
-        let componentSignature = "Client-Id:" + clientId;
-        componentSignature += "\n";
-        componentSignature += "Request-Id:" + requestId;
-        componentSignature += "\n";
-        componentSignature += "Request-Timestamp:" + requestTime;
-        componentSignature += "\n";
-        componentSignature += "Request-Target:" + requestTarget;
-        componentSignature += "\n";
-        componentSignature += "Digest:" + newdigest;
-        console.log(componentSignature);
-    var signatureHmacSha256 = CryptoJS.HmacSHA256(componentSignature,secretKey);
-    var signatureBase64 = CryptoJS.enc.Base64.stringify(signatureHmacSha256);
-
-        // Prepend encoded result with algorithm info HMACSHA256=
-        return "HMACSHA256="+signatureBase64
-    }
-
-    let newsignature = signature(clientId, secretKey, requestId, requestTime, requestTarget, newdigest);
-    let headerSignature = notificationHeader['signature'];
-    console.log("Signature Hash: ",newsignature);
-    console.log("Signature Doku: ", headerSignature);
-    console.log('-------------------------');
-    if (newsignature == headerSignature){
         const databody = req.body;
-        let invoicenumber2 = databody['order']['invoice_number'];
-        var productnotify = databody['additional_info']['info1'];
+        let invoicenumber2 = databody['external_id'];
+        var productnotify = databody['description'];
+        var statusnotif = databody['status'];
+        if (statusnotif == 'PAID'){
+            var newstatus = 'SUCCESS'
+        }else{
+            var newstatus = 'PENDING'
+        }
         console.log(productnotify);
         const response = {
             status: 'Success',
-            message: 'Signature is Valid'
+            message: 'Thank You!'
         };
         function getTransactionDate(){
             d = new Date();
@@ -1644,7 +1112,7 @@ router.post('/notification', function(req, res){
         let masa = getExpired();
         console.log(masa);
         console.log(response);
-        const sql = "UPDATE transaction SET transaction_update = '"+updatedate+"',status = 'SUCCESS', expired = '"+masa+"' WHERE invoice_number = '" + invoicenumber2 + "'";
+        const sql = "UPDATE transaction SET transaction_update = '"+updatedate+"',status = '"+newstatus+"', expired = '"+masa+"' WHERE invoice_number = '" + invoicenumber2 + "'";
                db.query(sql, function (err, result) {
                    if (err) throw err;
                    console.log("Number of records inserted: " + result.affectedRows);
@@ -2105,15 +1573,6 @@ router.post('/notification', function(req, res){
                  });
         res.status(200);
         res.json(response);
-    }else{
-        const response = {
-            status: 'Failed',
-            message: 'Signature not Valid'
-        };
-        console.log(response);
-        res.status(400);
-        res.json(response);
-    }
     
 });
 
@@ -2274,7 +1733,7 @@ router.get('/result/:invoice', function(req, res){
     redirect: 'follow'
     };
 
-    let url2 = process.env.PROD_URL + '/check-transaction';
+    let url2 = 'http://localhost:3000' + '/check-transaction';
     fetch(url2, requestOptions)
     .then(response => response.json())
     .then(result => {
@@ -2790,6 +2249,85 @@ router.post('/notifadmin', function(req, res){
 
 router.get('/mailexp', function(req, res){
     res.render('emailexp')
+});
+
+router.get('/tryxendit', function(req, res){
+    function authenticateUser(user, password){
+            var token = user + ":" + password;
+            var hash = btoa(token);
+
+            return "Basic " + hash;
+        };
+        let userprod = 'xnd_production_mgLjR8teaeHNRWS4ignx0geUPdEW8q8JSwdzMeIxKctZwtq7XKzClefirFAbj';
+        let usersatging = 'xnd_development_VANcrBN1Ij02PFeYpo2JmGKZkt9p27Nxn2UpwACARx1PjvOfY5Ob32fjSHcEI8r'
+        let pass = ''
+    let authorization = authenticateUser(usersatging,pass);
+    console.log(authorization);
+    function randomData(){
+        let result           = '';
+        let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let charactersLength = 10;
+        for ( let i = 0; i < charactersLength; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+    }
+    let random = randomData();
+    let invoice_number = "INV-NGAHIJI-"+random;
+    var axios = require('axios');
+        var data = JSON.stringify({
+        "external_id": invoice_number,
+        "amount": 10000,
+        "payer_email": "customer@domain.com",
+        "description": "Invoice Demo #123",
+        "customer": {
+            "given_names": "John",
+            "surname": "Doe",
+            "email": "johndoe@example.com",
+            "mobile_number": "+6285156908726",
+            "addresses": [
+            {
+                "city": "Jakarta Selatan",
+                "country": "Indonesia",
+                "postal_code": "12345",
+                "state": "Daerah Khusus Ibukota Jakarta",
+                "street_line1": "Jalan Makan",
+                "street_line2": "Kecamatan Kebayoran Baru"
+            }]},
+        "success_redirect_url": "https://www.google.com",
+        "failure_redirect_url": "https://www.google.com"
+        });
+
+        var config = {
+        method: 'post',
+        url: 'https://api.xendit.co/v2/invoices',
+        headers: { 
+            'Content-Type': 'application/json', 
+            'Authorization': authorization, 
+            'Cookie': 'incap_ses_1560_2182539=rXd6N9Tb50p320KkIjymFTnV2WQAAAAAW+pTOO3MMvzSAX6oVNa9XA==; nlbi_2182539=z5FlD+H83xY9ABT8tAof7AAAAAAsu9TZikfZHPVY74whP0hy'
+        },
+        data : data
+        };
+
+        axios(config)
+        .then(function (response) {
+        let urlinv = response.data.invoice_url
+        res.send(urlinv),
+        console.log(JSON.stringify(response.data))
+        })
+        .catch(function (error) {
+        console.log(error);
+        });
+
+
+});
+
+router.post('/notifxendit', function(req, res){
+    var body = req.body;
+    var header = req.header;
+    console.log(body);
+    console.log(header);
+    res.send('OK');
 });
 
 

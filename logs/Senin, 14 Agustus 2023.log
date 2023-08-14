@@ -1,0 +1,68 @@
+2023-08-14T07:41:10.560Z info: Server listening at http://localhost:3000
+2023-08-14T07:41:32.514Z info: Server listening at http://localhost:3000
+2023-08-14T07:51:01.541Z info: Server listening at http://localhost:3000
+2023-08-14T07:56:42.126Z info: Server listening at http://localhost:3000
+2023-08-14T08:34:10.270Z info: Server listening at http://localhost:3000
+2023-08-14T08:35:44.499Z info: Server listening at http://localhost:3000
+2023-08-14T08:36:46.834Z info: Server listening at http://localhost:3000
+2023-08-14T08:38:52.364Z info: Server listening at http://localhost:3000
+2023-08-14T08:39:42.474Z info: Server listening at http://localhost:3000
+2023-08-14T08:40:14.027Z info: Server listening at http://localhost:3000
+2023-08-14T08:41:29.139Z info: Server listening at http://localhost:3000
+2023-08-14T08:43:07.980Z info: Server listening at http://localhost:3000
+2023-08-14T08:44:26.761Z info: Server listening at http://localhost:3000
+2023-08-14T08:45:52.837Z info: Server listening at http://localhost:3000
+2023-08-14T08:48:06.486Z info: Server listening at http://localhost:3000
+2023-08-14T09:16:08.349Z info: Server listening at http://localhost:3000
+2023-08-14T09:17:45.186Z info: Server listening at http://localhost:3000
+2023-08-14T09:29:24.416Z info: Server listening at http://localhost:3000
+2023-08-14T09:31:04.164Z info: Server listening at http://localhost:3000
+2023-08-14T09:31:10.201Z info: Server listening at http://localhost:3000
+2023-08-14T09:31:23.571Z info: Server listening at http://localhost:3000
+2023-08-14T09:32:19.209Z info: Server listening at http://localhost:3000
+2023-08-14T09:35:24.939Z info: Server listening at http://localhost:3000
+2023-08-14T09:35:36.887Z info: Server listening at http://localhost:3000
+2023-08-14T09:36:34.132Z info: Server listening at http://localhost:3000
+2023-08-14T09:37:14.204Z info: /create-transaction - ::1 - ============== Inisiasi Data =============
+2023-08-14T09:38:12.150Z info: Server listening at http://localhost:3000
+2023-08-14T09:38:19.271Z info: /create-transaction - ::1 - ============== Inisiasi Data =============
+2023-08-14T09:38:19.271Z info: /create-transaction - ::1 - {"name":"Test Alif","email":"m.alif@doku.com","phone":"0822222222","invoice":"INV-NGAHIJI-EGFDIGJACI","amount":"52000","transaction_date":"Senin, 14 Agustus 2023 16:38:17","transaction_update":"Senin, 14 Agustus 2023 16:38:17","payment_method":"XENDIT CHECKOUT","status":"PENDING","product_id":"1","product_name":"Netflix","url_checkout":"https://checkout-staging.xendit.co/v2/64d9f6091c41e7464b2ab943","expired":"no expired"}
+2023-08-14T09:38:19.271Z info: /create-transaction - ::1 - ============== Save to DB =============
+2023-08-14T09:38:19.278Z info: /create-transaction - ::1 - Transaction Created
+2023-08-14T09:40:39.296Z info: Server listening at http://localhost:3000
+2023-08-14T09:41:51.831Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-EGFDIGJACI =============
+2023-08-14T09:41:51.832Z error: /check-transaction - ::1 - Exception, Invalid Signature
+2023-08-14T09:42:38.721Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-EGFDIGJACI =============
+2023-08-14T09:42:38.735Z error: /check-transaction - ::1 - Exception, Invalid Signature
+2023-08-14T09:43:13.522Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-EGFDIGJACI =============
+2023-08-14T09:43:13.531Z info: /check-transaction - ::1 - Data Collected
+2023-08-14T09:44:47.968Z info: Server listening at http://localhost:3000
+2023-08-14T09:44:50.469Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-EGFDIGJACI =============
+2023-08-14T09:44:50.469Z info: /check-transaction - ::1 - Data Collected
+2023-08-14T09:46:38.030Z info: Server listening at http://localhost:3000
+2023-08-14T09:49:21.638Z info: /create-transaction - ::1 - ============== Inisiasi Data =============
+2023-08-14T09:49:21.638Z info: /create-transaction - ::1 - {"name":"Alif","email":"ashddq.work@gmail.com","phone":"0822222222","invoice":"INV-NGAHIJI-EHIBJHAEDF","amount":"53000","transaction_date":"Senin, 14 Agustus 2023 16:49:19","transaction_update":"Senin, 14 Agustus 2023 16:49:19","payment_method":"XENDIT CHECKOUT","status":"PENDING","product_id":"4","product_name":"Spotify","url_checkout":"https://checkout-staging.xendit.co/v2/64d9f8a0f0b9af2415c1f82c","expired":"no expired"}
+2023-08-14T09:49:21.639Z info: /create-transaction - ::1 - ============== Save to DB =============
+2023-08-14T09:49:21.640Z info: /create-transaction - ::1 - Transaction Created
+2023-08-14T09:50:21.365Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-EHIBJHAEDF =============
+2023-08-14T09:50:21.366Z info: /check-transaction - ::1 - Data Collected
+2023-08-14T09:50:35.700Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-EHIBJHAEDF =============
+2023-08-14T09:50:35.701Z info: /check-transaction - ::1 - Data Collected
+2023-08-14T09:50:39.133Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-EHIBJHAEDF =============
+2023-08-14T09:50:39.134Z info: /check-transaction - ::1 - Data Collected
+2023-08-14T09:50:40.014Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-EHIBJHAEDF =============
+2023-08-14T09:50:40.015Z info: /check-transaction - ::1 - Data Collected
+2023-08-14T09:52:49.719Z info: /create-transaction - ::1 - ============== Inisiasi Data =============
+2023-08-14T09:52:49.719Z info: /create-transaction - ::1 - {"name":"Alif","email":"ashddq.work@gmail.com","phone":"082223631214","invoice":"INV-NGAHIJI-JAJGIGBGBI","amount":"26000","transaction_date":"Senin, 14 Agustus 2023 16:52:47","transaction_update":"Senin, 14 Agustus 2023 16:52:47","payment_method":"XENDIT CHECKOUT","status":"PENDING","product_id":"2","product_name":"Disney+ Hotstar","url_checkout":"https://checkout-staging.xendit.co/v2/64d9f9707ef6350c3975a3be","expired":"no expired"}
+2023-08-14T09:52:49.720Z info: /create-transaction - ::1 - ============== Save to DB =============
+2023-08-14T09:52:49.723Z info: /create-transaction - ::1 - Transaction Created
+2023-08-14T09:54:53.543Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-JAJGIGBGBI =============
+2023-08-14T09:54:53.544Z info: /check-transaction - ::1 - Data Collected
+2023-08-14T10:00:40.558Z info: Server listening at http://localhost:3000
+2023-08-14T10:01:44.028Z info: Server listening at http://localhost:3000
+2023-08-14T10:02:04.189Z info: /create-transaction - ::1 - ============== Inisiasi Data =============
+2023-08-14T10:02:04.189Z info: /create-transaction - ::1 - {"name":"Test Alif","email":"ashddq.work@gmail.com","phone":"082223631214","invoice":"INV-NGAHIJI-FJFFCBACEA","amount":"26000","transaction_date":"Senin, 14 Agustus 2023 17:2:2","transaction_update":"Senin, 14 Agustus 2023 17:2:2","payment_method":"XENDIT CHECKOUT","status":"PENDING","product_id":"2","product_name":"Disney+ Hotstar","url_checkout":"https://checkout-staging.xendit.co/v2/64d9fb9a1c41e70a632ac14a","expired":"no expired"}
+2023-08-14T10:02:04.189Z info: /create-transaction - ::1 - ============== Save to DB =============
+2023-08-14T10:02:04.192Z info: /create-transaction - ::1 - Transaction Created
+2023-08-14T10:02:30.462Z info: /check-transaction - ::1 - ============== Get Data INV-NGAHIJI-FJFFCBACEA =============
+2023-08-14T10:02:30.463Z info: /check-transaction - ::1 - Data Collected
