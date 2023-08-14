@@ -151,8 +151,6 @@ router.post('/create-transaction', function (req, res) {
                }
             let transaction_date = transactiondate();
             //create url checkout
-            // let clientId = 'BRN-0202-1675765736638';//BRN-0213-1690889791457
-            // let secretKey = 'SK-jb3aBtvB6RAljD1SRjAR';//SK-DFqKXgucGSmetK8QvA04
             let clientId = process.env.JOKUL_CLIENTID;
             let secretKey = process.env.JOKUL_KEY;
             function timeStamp(){
@@ -167,7 +165,9 @@ router.post('/create-transaction', function (req, res) {
             let urlcallbackhosting = 'https://ngahiji.xyz';
             let callback_url = urlcallbackhosting+'/result/';
             let requestTarget = '/checkout/v1/payment'
-            let url = 'https://api-sandbox.doku.com'+ requestTarget;
+            let jokulurlprod = 'https://api.doku.com';
+            let jokulurlstaging = 'https://api-sandbox.doku.com';
+            let url = jokulurlprod + requestTarget;
             const body = JSON.stringify({
                 order: {
                     amount: amount,
@@ -229,7 +229,7 @@ router.post('/create-transaction', function (req, res) {
                     }
                 },
                 additional_info: {
-                    doku_wallet_notify_url: urlcallbackprod+'/notification',
+                    doku_wallet_notify_url: urlcallbackhosting+'/notification',
                     info1: product_name_checkout
                 }
             });
@@ -366,8 +366,8 @@ router.post('/create-transaction', function (req, res) {
                                }
                             let transaction_date = transactiondate();
                             //create url checkout
-                            let clientId = 'BRN-0213-1690889791457';
-                            let secretKey = 'SK-DFqKXgucGSmetK8QvA04';
+                            let clientId = 'BRN-0215-1691805110427';
+                            let secretKey = 'SK-S2MCHOMyROwPXinPmGqG';
                             function timeStamp(){
                                 let date = new Date().toISOString();
                                 return date.substring(0, 19)+'Z';
@@ -380,7 +380,9 @@ router.post('/create-transaction', function (req, res) {
                             let urlcallbackhosting = 'https://ngahiji.xyz';
                             let callback_url = urlcallbackhosting+'/result/';
                             let requestTarget = '/checkout/v1/payment'
-                            let url = 'https://api-sandbox.doku.com'+ requestTarget;
+                            let jokulurlprod = 'https://api.doku.com';
+                            let jokulurlstaging = 'https://api-sandbox.doku.com';
+                            let url = jokulurlprod + requestTarget;
                             const body = JSON.stringify({
                                 order: {
                                     amount: amount,
@@ -442,7 +444,7 @@ router.post('/create-transaction', function (req, res) {
                                     }
                                 },
                                 additional_info: { 
-                                    doku_wallet_notify_url: urlcallbackprod+'/notification',
+                                    doku_wallet_notify_url: urlcallbackhosting+'/notification',
                                     info1: product_name_checkout
                                 }
                             });
@@ -804,7 +806,7 @@ router.post('/create-transaction', function (req, res) {
                                                                                                                     <td class="pad" style="padding-top:20px;">
                                                                                                                         <div style="font-family: sans-serif">
                                                                                                                             <div class style="font-size: 12px; font-family: 'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; mso-line-height-alt: 14.399999999999999px; color: #a8bf6f; line-height: 1.2;">
-                                                                                                                                <p style="margin: 0; font-size: 12px; text-align: center; mso-line-height-alt: 14.399999999999999px;"><span style="color:#ffffff;font-size:12px;"><span style="font-size:12px;color:#ffffff;">@2023 Ngahiji 1.0.0</span></span><br><span style="color:#ffffff;font-size:12px;"><span style="font-size:12px;color:#ffffff;">cs@seakun.xyz</span></span><br></p>
+                                                                                                                                <p style="margin: 0; font-size: 12px; text-align: center; mso-line-height-alt: 14.399999999999999px;"><span style="color:#ffffff;font-size:12px;"><span style="font-size:12px;color:#ffffff;">@2023 Ngahiji 1.0.0</span></span><br><span style="color:#ffffff;font-size:12px;"><span style="font-size:12px;color:#ffffff;">cs@ngahiji.xyz</span></span><br></p>
                                                                                                                             </div>
                                                                                                                         </div>
                                                                                                                     </td>
@@ -914,8 +916,8 @@ router.post('/create-transaction', function (req, res) {
                                }
                             let transaction_date = transactiondate();
                             //create url checkout
-                            let clientId = 'BRN-0213-1690889791457';
-                            let secretKey = 'SK-DFqKXgucGSmetK8QvA04';
+                            let clientId = 'BRN-0215-1691805110427';
+                            let secretKey = 'SK-S2MCHOMyROwPXinPmGqG';
                             function timeStamp(){
                                 let date = new Date().toISOString();
                                 return date.substring(0, 19)+'Z';
@@ -926,7 +928,9 @@ router.post('/create-transaction', function (req, res) {
                             let urlcallbackhosting = 'https://ngahiji.xyz';
                             let callback_url = urlcallbackhosting+'/result/';
                             let requestTarget = '/checkout/v1/payment'
-                            let url = 'https://api-sandbox.doku.com'+ requestTarget;
+                            let jokulurlprod = 'https://api.doku.com';
+                            let jokulurlstaging = 'https://api-sandbox.doku.com';
+                            let url = jokulurlprod + requestTarget;
                             const body = JSON.stringify({
                                 order: {
                                     amount: amount,
@@ -988,7 +992,7 @@ router.post('/create-transaction', function (req, res) {
                                     }
                                 },
                                 additional_info: {
-                                    doku_wallet_notify_url: urlcallbackprod+'/notification',
+                                    doku_wallet_notify_url: urlcallbackhosting+'/notification',
                                     info1: product_name_checkout
                                 }
                             });
@@ -1947,7 +1951,7 @@ router.post('/notification', function(req, res){
                                                                                             <tr>
                                                                                                 <td class="pad" style="padding-bottom:10px;padding-left:10px;padding-right:10px;padding-top:25px;text-align:center;">
                                                                                                     <div class="alignment" align="center"><!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" style="height:62px;width:204px;v-text-anchor:middle;" arcsize="7%" stroke="false" fillcolor="#a8bf6f"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#ffffff; font-family:'Trebuchet MS', Tahoma, sans-serif; font-size:16px"><![endif]-->
-                                                                                                        <div style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#000000;border-radius:4px;width:auto;border-top:0px solid transparent;font-weight:undefined;border-right:0px solid transparent;border-bottom:0px solid transparent;border-left:0px solid transparent;padding-top:15px;padding-bottom:15px;font-family:'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:15px;padding-right:15px;font-size:16px;display:inline-block;letter-spacing:normal;"><a href="https://wa.me/6288222361328?text=Halo%20ka,%20pesananku%20dengan%20invoice%20${invoice}%20sudah%20success"><span style="word-break: break-word; line-height: 32px; color: #ffffff;">Hubungi admin.</span></a</span></div><!--[if mso]></center></v:textbox></v:roundrect><![endif]-->
+                                                                                                        <div style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#000000;border-radius:4px;width:auto;border-top:0px solid transparent;font-weight:undefined;border-right:0px solid transparent;border-bottom:0px solid transparent;border-left:0px solid transparent;padding-top:15px;padding-bottom:15px;font-family:'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:15px;padding-right:15px;font-size:16px;display:inline-block;letter-spacing:normal;"><a href="https://wa.me/6283847172217?text=Halo%20ka,%20pesananku%20dengan%20invoice%20${invoice}%20sudah%20success"><span style="word-break: break-word; line-height: 32px; color: #ffffff;">Hubungi admin.</span></a</span></div><!--[if mso]></center></v:textbox></v:roundrect><![endif]-->
                                                                                                     </div>
                                                                                                 </td>
                                                                                             </tr>
@@ -1977,7 +1981,7 @@ router.post('/notification', function(req, res){
                                                                                                 <td class="pad" style="padding-top:20px;">
                                                                                                     <div style="font-family: sans-serif">
                                                                                                         <div class style="font-size: 12px; font-family: 'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; mso-line-height-alt: 14.399999999999999px; color: #a8bf6f; line-height: 1.2;">
-                                                                                                            <p style="margin: 0; font-size: 12px; text-align: center; mso-line-height-alt: 14.399999999999999px;"><span style="color:#ffffff;font-size:12px;"><span style="font-size:12px;color:#ffffff;">@2023 Ngahiji 1.0.0</span></span><br><span style="color:#ffffff;font-size:12px;"><span style="font-size:12px;color:#ffffff;">cs@seakun.xyz</span></span><br></p>
+                                                                                                            <p style="margin: 0; font-size: 12px; text-align: center; mso-line-height-alt: 14.399999999999999px;"><span style="color:#ffffff;font-size:12px;"><span style="font-size:12px;color:#ffffff;">@2023 Ngahiji 1.0.0</span></span><br><span style="color:#ffffff;font-size:12px;"><span style="font-size:12px;color:#ffffff;">cs@ngahiji.xyz</span></span><br></p>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </td>
@@ -2571,7 +2575,7 @@ router.get('/mail', function(req, res){
                                                                         <td class="pad" style="padding-top:20px;">
                                                                             <div style="font-family: sans-serif">
                                                                                 <div class style="font-size: 12px; font-family: 'Montserrat', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; mso-line-height-alt: 14.399999999999999px; color: #a8bf6f; line-height: 1.2;">
-                                                                                    <p style="margin: 0; font-size: 12px; text-align: center; mso-line-height-alt: 14.399999999999999px;"><span style="color:#ffffff;font-size:12px;"><span style="font-size:12px;color:#ffffff;">@2023 Ngahiji 1.0.0</span></span><br><span style="color:#ffffff;font-size:12px;"><span style="font-size:12px;color:#ffffff;">cs@seakun.xyz</span></span><br></p>
+                                                                                    <p style="margin: 0; font-size: 12px; text-align: center; mso-line-height-alt: 14.399999999999999px;"><span style="color:#ffffff;font-size:12px;"><span style="font-size:12px;color:#ffffff;">@2023 Ngahiji 1.0.0</span></span><br><span style="color:#ffffff;font-size:12px;"><span style="font-size:12px;color:#ffffff;">cs@ngahiji.xyz</span></span><br></p>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -2713,7 +2717,7 @@ router.get('/wa', function(req, res){
         redirect: 'follow'
       };
       
-      fetch("https://api.whatsapp.com/send/?phone=6288222361328&text=Halo+ka%2C+pesananku+dengan+invoice+INV-xx+sudah+success.&type=phone_number&app_absent=0", requestOptions)
+      fetch("https://api.whatsapp.com/send/?phone=6283847172217&text=Halo+ka%2C+pesananku+dengan+invoice+INV-xx+sudah+success.&type=phone_number&app_absent=0", requestOptions)
         .then(response => response.text())
         .then(result => {
             console.log(result),
